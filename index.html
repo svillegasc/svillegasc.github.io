@@ -1,545 +1,764 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" data-lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santiago Villegas Castro | Senior DevOps & Cloud Infrastructure Engineer</title>
-    
-    <!-- Fuentes Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santiago Villegas Castro | Senior DevOps & Cloud Infrastructure Engineer</title>
+<meta name="description" content="Ingeniero Senior con más de 8 años de experiencia en AWS, Kubernetes y Terraform. Portafolio profesional y contacto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1220;
+    --navy-soft:#131E30;
+    --mist:#F5F7FA;
+    --ink:#16202A;
+    --teal:#12A8A0;
+    --teal-dim:#0E8880;
+    --amber:#F2A93B;
+    --slate:#64748B;
+    --line:#E2E8F0;
+    --white:#FFFFFF;
+    --radius:10px;
+    --maxw:1120px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--mist);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display);margin:0;line-height:1.15;}
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  img{max-width:100%;display:block;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,4vw,38px);}
+  .section-head p{color:var(--slate);margin-top:12px;font-size:17px;}
 
-    <!-- Tailwind CSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: { 900: '#0F172A', 850: '#151e2e', 800: '#1E293B', 700: '#334155', 400: '#94A3B8' },
-                        cyan: { 500: '#06B6D4', 400: '#22d3ee' },
-                        emerald: { 500: '#10B981', 400: '#34d399' },
-                        amber: { 500: '#F59E0B' }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .lang-en { display: none; }
-        body.english-mode .lang-es { display: none !important; }
-        body.english-mode .lang-en { display: inline-block !important; }
-        body.english-mode p.lang-en, 
-        body.english-mode div.lang-en, 
-        body.english-mode ul.lang-en,
-        body.english-mode span.block.lang-en { display: block !important; }
-        
-        .gradient-text {
-            background: linear-gradient(to right, #06B6D4, #10B981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+  /* language toggle visibility */
+  body[data-lang="es"] .lang-en{display:none !important;}
+  body[data-lang="en"] .lang-es{display:none !important;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    transition:background .25s ease, padding .25s ease, border-color .25s ease;
+    border-bottom:1px solid transparent;
+  }
+  header .container{display:flex;align-items:center;justify-content:space-between;}
+  header.scrolled{
+    background:rgba(11,18,32,0.9);
+    backdrop-filter:blur(10px);
+    border-color:rgba(255,255,255,0.08);
+    padding:12px 0;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:19px;
+    color:var(--white);
+    letter-spacing:.02em;
+  }
+  .logo span{color:var(--teal);}
+  nav.main-nav{display:none;gap:32px;align-items:center;}
+  nav.main-nav a{
+    color:#CBD5E1;font-size:14.5px;font-weight:500;
+    transition:color .2s ease;
+  }
+  nav.main-nav a:hover{color:var(--white);}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .lang-toggle{
+    font-family:var(--font-mono);
+    font-size:13px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.15);
+    color:var(--white);
+    border-radius:100px;
+    padding:6px 6px;
+    cursor:pointer;
+    display:flex;gap:2px;
+  }
+  .lang-toggle button{
+    font-family:var(--font-mono);
+    background:none;border:none;color:#94A3B8;
+    padding:4px 10px;border-radius:100px;font-size:12.5px;cursor:pointer;
+    transition:all .2s ease;
+  }
+  .lang-toggle button.active{background:var(--teal);color:var(--navy);font-weight:600;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:11px 22px;border-radius:100px;font-size:14.5px;font-weight:600;
+    cursor:pointer;border:1px solid transparent;transition:all .2s ease;
+    font-family:var(--font-body);
+  }
+  .btn-primary{background:var(--teal);color:var(--navy);}
+  .btn-primary:hover{background:#17c1b8;transform:translateY(-1px);}
+  .btn-outline{background:transparent;border-color:rgba(255,255,255,0.25);color:var(--white);}
+  .btn-outline:hover{border-color:var(--white);}
+  .btn-dark{background:var(--navy);color:var(--white);}
+  .btn-dark:hover{background:var(--navy-soft);transform:translateY(-1px);}
+  .header-actions .btn{padding:9px 18px;font-size:13.5px;}
+  .menu-toggle{
+    display:flex;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;
+  }
+  .menu-toggle span{width:20px;height:2px;background:var(--white);border-radius:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--navy);
+    padding:170px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 400px at 85% 15%, rgba(18,168,160,0.18), transparent 60%);
+    pointer-events:none;
+  }
+  .hero .container{
+    display:grid;grid-template-columns:1fr;gap:56px;position:relative;z-index:1;
+  }
+  .hero h1{
+    font-size:clamp(32px,5.4vw,52px);
+    color:var(--white);
+    margin-top:10px;
+  }
+  .hero h1 span{color:var(--teal);}
+  .hero-sub{
+    color:#B8C4D6;
+    font-size:18px;
+    margin-top:20px;
+    max-width:520px;
+  }
+  .hero-meta{
+    color:#8093AB;
+    font-size:15px;
+    margin-top:18px;
+    font-family:var(--font-mono);
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+
+  /* pipeline signature element */
+  .pipeline{
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:var(--radius);
+    padding:26px 20px;
+  }
+  .pipeline-step{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;position:relative;}
+  .pipeline-dot{
+    width:14px;height:14px;border-radius:50%;
+    background:#2A3A50;
+    box-shadow:0 0 0 4px rgba(18,168,160,0);
+    animation:pulse 6s infinite;
+  }
+  .pipeline-step:nth-child(1) .pipeline-dot{animation-delay:0s;}
+  .pipeline-step:nth-child(3) .pipeline-dot{animation-delay:1.2s;}
+  .pipeline-step:nth-child(5) .pipeline-dot{animation-delay:2.4s;}
+  .pipeline-step:nth-child(7) .pipeline-dot{animation-delay:3.6s;}
+  .pipeline-step:nth-child(9) .pipeline-dot{animation-delay:4.8s;}
+  @keyframes pulse{
+    0%,92%,100%{background:#2A3A50;box-shadow:0 0 0 0 rgba(18,168,160,0);}
+    8%{background:var(--teal);box-shadow:0 0 0 6px rgba(18,168,160,0.15);}
+    20%{background:#2A3A50;box-shadow:0 0 0 0 rgba(18,168,160,0);}
+  }
+  .pipeline-label{
+    font-family:var(--font-mono);font-size:12px;color:#8093AB;letter-spacing:.03em;
+  }
+  .pipeline-line{height:1px;background:rgba(255,255,255,0.12);flex:0.6;margin-top:-24px;}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--white);}
+  .about .container{display:grid;grid-template-columns:1fr;gap:48px;align-items:start;}
+  .about-text p{margin-bottom:18px;font-size:16.5px;color:#334155;}
+  .tag-panel{
+    background:var(--mist);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;gap:16px;
+  }
+  .tag-panel-title{font-family:var(--font-mono);font-size:12.5px;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+  .tag-item{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink);}
+  .tag-emoji{font-size:20px;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .experience{background:var(--mist);}
+  .timeline{position:relative;border-left:2px solid var(--line);padding-left:32px;display:flex;flex-direction:column;gap:36px;}
+  .exp-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 28px;position:relative;
+  }
+  .exp-card::before{
+    content:"";position:absolute;left:-40px;top:30px;width:11px;height:11px;border-radius:50%;
+    background:var(--teal);border:3px solid var(--mist);
+  }
+  .exp-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:6px;}
+  .exp-role{font-family:var(--font-display);font-size:18px;font-weight:600;}
+  .exp-dates{font-family:var(--font-mono);font-size:13px;color:var(--slate);white-space:nowrap;}
+  .exp-company{color:var(--teal-dim);font-weight:600;font-size:14.5px;margin-bottom:14px;}
+  .exp-card ul{display:flex;flex-direction:column;gap:9px;}
+  .exp-card li{font-size:15px;color:#334155;padding-left:18px;position:relative;}
+  .exp-card li::before{content:"›";position:absolute;left:0;color:var(--teal);font-weight:700;}
+  .exp-card li b{color:var(--ink);}
+
+  .edu-cert-grid{display:grid;grid-template-columns:1fr;gap:32px;margin-top:56px;}
+  .mini-card-title{font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:16px;}
+  .mini-list{display:flex;flex-direction:column;gap:12px;}
+  .mini-list li{font-size:15px;}
+  .mini-list .deg{font-weight:600;}
+  .mini-list .inst{color:var(--slate);font-size:13.5px;}
+  .cert-badges{display:flex;flex-wrap:wrap;gap:10px;}
+  .cert-badge{
+    font-family:var(--font-mono);font-size:13px;background:var(--white);
+    border:1px solid var(--line);border-radius:100px;padding:7px 14px;color:var(--ink);
+  }
+
+  /* ---------- STACK ---------- */
+  .stack{background:var(--white);}
+  .stack-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  .stack-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--mist);
+  }
+  .stack-card-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .stack-icon{
+    width:38px;height:38px;border-radius:9px;background:var(--navy);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .stack-icon svg{width:20px;height:20px;stroke:var(--teal);}
+  .stack-card-head h3{font-size:16px;}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .stack-tag{
+    font-family:var(--font-mono);font-size:12.5px;background:var(--white);
+    border:1px solid var(--line);border-radius:6px;padding:5px 10px;color:#334155;
+  }
+  .lang-row{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap;}
+  .lang-chip{font-size:14.5px;color:var(--slate);}
+  .lang-chip b{color:var(--ink);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--navy);color:var(--white);}
+  .contact .section-head p{color:#B8C4D6;}
+  .contact .eyebrow{color:var(--teal);}
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:40px;}
+  .form-field{margin-bottom:16px;}
+  .form-field label{display:block;font-size:13.5px;color:#B8C4D6;margin-bottom:6px;font-family:var(--font-mono);}
+  .form-field input, .form-field textarea{
+    width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.04);color:var(--white);font-family:var(--font-body);font-size:15px;
+  }
+  .form-field textarea{resize:vertical;min-height:110px;}
+  .form-field input::placeholder, .form-field textarea::placeholder{color:#5C6C82;}
+  .contact-card{
+    background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius);padding:28px;
+  }
+  .contact-link{
+    display:flex;align-items:center;gap:12px;padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;
+  }
+  .contact-link:last-of-type{border-bottom:none;}
+  .contact-link svg{width:18px;height:18px;stroke:var(--teal);flex-shrink:0;}
+
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.08);padding:28px 0;}
+  footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer p{color:#8093AB;font-size:13.5px;}
+  footer .foot-links{display:flex;gap:18px;}
+  footer .foot-links a{color:#B8C4D6;font-size:13.5px;}
+  footer .foot-links a:hover{color:var(--white);}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  @media(min-width:720px){
+    .about .container{grid-template-columns:1.4fr 1fr;}
+    .edu-cert-grid{grid-template-columns:1fr 1fr;}
+    .stack-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(min-width:900px){
+    nav.main-nav{display:flex;}
+    .menu-toggle{display:none;}
+    .hero .container{grid-template-columns:1.1fr 0.9fr;align-items:center;}
+    .stack-grid{grid-template-columns:1fr 1fr 1fr;}
+  }
+  @media(prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none;opacity:1;transform:none;}
+    .pipeline-dot{animation:none;}
+  }
+
+  /* mobile nav panel */
+  .mobile-nav{
+    position:fixed;inset:0;background:var(--navy);z-index:99;
+    display:none;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  }
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{color:var(--white);font-size:22px;font-family:var(--font-display);}
+  .mobile-nav .close-btn{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--white);font-size:28px;cursor:pointer;}
+</style>
 </head>
-<body class="bg-slate-900 text-slate-50 font-sans antialiased selection:bg-cyan-500 selection:text-slate-900">
+<body data-lang="es">
 
-    <!-- Navegación Sticky -->
-    <header class="fixed w-full top-0 bg-slate-900/90 backdrop-blur-md z-50 border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="font-mono font-bold text-xl tracking-tighter hover:text-cyan-400 transition-colors">
-                <span class="text-cyan-500">&gt;</span> SVC<span class="text-slate-400">.dev</span>
-            </a>
-            <nav class="hidden md:flex gap-6 items-center font-medium text-sm">
-                <a href="#about" class="hover:text-cyan-400 transition-colors">
-                    <span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span>
-                </a>
-                <a href="#certs" class="hover:text-cyan-400 transition-colors">
-                    <span class="lang-es">Certificaciones</span><span class="lang-en">Certifications</span>
-                </a>
-                <a href="#stack" class="hover:text-cyan-400 transition-colors">Stack</a>
-                <a href="#experience" class="hover:text-cyan-400 transition-colors">
-                    <span class="lang-es">Experiencia</span><span class="lang-en">Experience</span>
-                </a>
-                
-                <!-- Switch Bilingüe -->
-                <button id="langToggle" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded border border-slate-700 transition-colors text-xs font-mono">
-                    <span class="lang-es">🌐 Switch to English</span><span class="lang-en">🌐 Cambiar a Español</span>
-                </button>
-                
-                <a href="#contact" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 px-4 py-2 rounded font-semibold transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                    <span class="lang-es">Contacto</span><span class="lang-en">Contact</span>
-                </a>
-            </nav>
+<header id="site-header">
+  <div class="container">
+    <a href="#inicio" class="logo">S<span>VC</span></a>
+    <nav class="main-nav">
+      <a href="#inicio"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+      <a href="#sobre-mi"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a>
+      <a href="#experiencia"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a>
+      <a href="#stack"><span class="lang-es">Stack</span><span class="lang-en">Stack</span></a>
+      <a href="#contacto"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-toggle">
+        <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="btn btn-primary cv-link" href="CV_SANTIAGO_VILLEGAS_ES.pdf" download style="display:none" id="cv-header">
+        <span class="lang-es">Descargar CV</span><span class="lang-en">Download CV</span>
+      </a>
+      <button class="menu-toggle" onclick="toggleMobileNav(true)" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <button class="close-btn" onclick="toggleMobileNav(false)">&times;</button>
+  <a href="#inicio" onclick="toggleMobileNav(false)"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+  <a href="#sobre-mi" onclick="toggleMobileNav(false)"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a>
+  <a href="#experiencia" onclick="toggleMobileNav(false)"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a>
+  <a href="#stack" onclick="toggleMobileNav(false)">Stack</a>
+  <a href="#contacto" onclick="toggleMobileNav(false)"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div>
+      <span class="eyebrow">Senior DevOps &amp; Cloud Infrastructure Engineer</span>
+      <h1 class="lang-es">Hola, soy <span>Santiago Villegas.</span></h1>
+      <h1 class="lang-en">Hi, I'm <span>Santiago Villegas.</span></h1>
+
+      <p class="hero-sub lang-es">Diseño y automatizo infraestructura en la nube para que los equipos de desarrollo entreguen software más rápido, con menos fricción y sin sorpresas en producción.</p>
+      <p class="hero-sub lang-en">I design and automate cloud infrastructure so development teams can ship faster, with less friction and fewer surprises in production.</p>
+
+      <p class="hero-meta lang-es">+8 años liderando infraestructura AWS, Kubernetes y Terraform — de la teoría a la práctica.</p>
+      <p class="hero-meta lang-en">8+ years leading AWS, Kubernetes, and Terraform infrastructure — from theory to practice.</p>
+
+      <div class="hero-cta">
+        <a href="CV_SANTIAGO_VILLEGAS_ES.pdf" download class="btn btn-primary cv-link" id="cv-hero">
+          <span class="lang-es">Descargar CV</span><span class="lang-en">Download CV</span>
+        </a>
+        <a href="#contacto" class="btn btn-outline">
+          <span class="lang-es">Hablemos →</span><span class="lang-en">Let's talk →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pipeline reveal">
+      <div class="pipeline-step"><div class="pipeline-dot"></div><span class="pipeline-label">commit</span></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><div class="pipeline-dot"></div><span class="pipeline-label">build</span></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><div class="pipeline-dot"></div><span class="pipeline-label">test</span></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><div class="pipeline-dot"></div><span class="pipeline-label">deploy</span></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-step"><div class="pipeline-dot"></div><span class="pipeline-label">live</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="sobre-mi">
+  <div class="container">
+    <div class="about-text reveal">
+      <span class="eyebrow"><span class="lang-es">Sobre mí</span><span class="lang-en">About me</span></span>
+      <h2 style="margin-bottom:24px;">
+        <span class="lang-es">Infraestructura, con criterio propio</span>
+        <span class="lang-en">Infrastructure, with judgment</span>
+      </h2>
+
+      <div class="lang-es">
+        <p>Llevo más de 8 años trabajando en infraestructura y nube, pero mi curiosidad por entender cómo funcionan los sistemas viene de mucho antes — probablemente del mismo lugar de donde viene mi gusto por los videojuegos: la fascinación por ver cómo algo complejo funciona bien, de forma consistente, bajo presión.</p>
+        <p>Como Ingeniero especializado en cultura DevOps, diseño arquitecturas en AWS, automatizo despliegues con Terraform y Kubernetes, y construyo pipelines de CI/CD que le devuelven tiempo a los equipos de desarrollo. A lo largo de mi carrera he liderado migraciones de arquitecturas monolíticas a microservicios, reducido costos de nube de forma medible y acompañado equipos en su transición hacia una cultura DevOps real, no solo de nombre.</p>
+        <p>Fuera del teclado, me vas a encontrar jugando —en PC, Xbox o Switch— o armando estrategias en mi colección de juegos de mesa, donde la planificación y el pensamiento sistémico que uso todos los días en el trabajo se convierten en pura diversión. Comparto mi vida con Meli, mi esposa, y con Hana y Kuma, mis dos perros, que se encargan de recordarme que hay vida fuera de la terminal.</p>
+      </div>
+      <div class="lang-en">
+        <p>I've spent 8+ years working in infrastructure and cloud, but my curiosity about how systems work goes back further — probably the same place my love for video games comes from: the fascination with watching something complex work well, consistently, under pressure.</p>
+        <p>As an engineer focused on DevOps culture, I design AWS architectures, automate deployments with Terraform and Kubernetes, and build CI/CD pipelines that give development teams their time back. Throughout my career I've led migrations from monolithic architectures to microservices, delivered measurable cloud cost reductions, and helped teams move toward a real DevOps culture — not just the buzzword.</p>
+        <p>Away from the keyboard, you'll find me gaming — on PC, Xbox, or Switch — or strategizing over my collection of board games, where the planning and systems thinking I use every day at work become pure fun. I share my life with Meli, my wife, and Hana and Kuma, my two dogs, who make sure there's life outside the terminal.</p>
+      </div>
+    </div>
+
+    <div class="tag-panel reveal">
+      <span class="tag-panel-title lang-es">Fuera del trabajo</span>
+      <span class="tag-panel-title lang-en">Outside of work</span>
+      <div class="tag-item"><span class="tag-emoji">🎮</span><span class="lang-es">Gamer — PC, Xbox &amp; Switch</span><span class="lang-en">Gamer — PC, Xbox &amp; Switch</span></div>
+      <div class="tag-item"><span class="tag-emoji">♟️</span><span class="lang-es">Coleccionista de juegos de mesa estratégicos</span><span class="lang-en">Strategic board game collector</span></div>
+      <div class="tag-item"><span class="tag-emoji">🐾</span><span class="lang-es">Hana &amp; Kuma, mis dos perros</span><span class="lang-en">Hana &amp; Kuma, my two dogs</span></div>
+      <div class="tag-item"><span class="tag-emoji">💛</span><span class="lang-es">Vida junto a Meli, mi esposa</span><span class="lang-en">Life alongside Meli, my wife</span></div>
+      <div class="tag-item"><span class="tag-emoji">📍</span><span>Medellín, Colombia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="experience" id="experiencia">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="lang-es">Trayectoria</span><span class="lang-en">Career</span></span>
+      <h2><span class="lang-es">Experiencia Profesional</span><span class="lang-en">Professional Experience</span></h2>
+      <p class="lang-es">8+ años construyendo y escalando infraestructura cloud, de junior a liderazgo técnico.</p>
+      <p class="lang-en">8+ years building and scaling cloud infrastructure, from junior to technical leadership.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-role"><span class="lang-es">Senior Ingeniero de Infraestructura</span><span class="lang-en">Senior Infrastructure Engineer</span></span>
+          <span class="exp-dates">Oct 2024 – Abr 2026</span>
         </div>
-    </header>
+        <div class="exp-company">F2X · Flypass</div>
+        <ul class="lang-es">
+          <li>Lideré la migración de monolito a microservicios sobre Amazon EKS con observabilidad end-to-end (Grafana, Prometheus, OTel) para <b>50+ servicios</b>.</li>
+          <li>Optimicé el tráfico interno vía API Gateway VPC Link + ALB Controller, eliminando latencia y puntos de falla.</li>
+          <li>Reduje los tiempos de deploy en un <b>75%</b> mediante la reestructuración de pipelines en GitHub Actions con paralelización y cacheo.</li>
+          <li>Implementé automatizaciones self-service (Slack + AWS) y desarrollé un agente de IA en Jira para triaje de infraestructura.</li>
+          <li>Gestioné arquitectura multi-cuenta con AWS Organizations e IAM federado para entornos de Prod, Cert y QA.</li>
+        </ul>
+        <ul class="lang-en">
+          <li>Led the migration from monolith to microservices on Amazon EKS with end-to-end observability (Grafana, Prometheus, OTel) for <b>50+ services</b>.</li>
+          <li>Optimized internal traffic via API Gateway VPC Link + ALB Controller, eliminating latency and points of failure.</li>
+          <li>Reduced deployment times by <b>75%</b> by restructuring GitHub Actions pipelines with parallelization and caching.</li>
+          <li>Implemented self-service automations (Slack + AWS) and developed an AI agent in Jira for infrastructure triage.</li>
+          <li>Managed multi-account architecture using AWS Organizations and federated IAM for Prod, Cert, and QA environments.</li>
+        </ul>
+      </div>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        <div class="flex-1 space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="lang-es">Disponible para nuevas oportunidades laborales</span>
-                <span class="lang-en">Available for new career opportunities</span>
-            </div>
-            
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-                <span class="lang-es">Diseño, automatizo y escalo <span class="gradient-text">infraestructura Cloud.</span></span>
-                <span class="lang-en">Designing, automating &amp; scaling <span class="gradient-text">cloud infrastructure.</span></span>
-            </h1>
-            
-            <p class="text-lg text-slate-400 leading-relaxed">
-                <span class="lang-es">Hola, soy <strong>Santiago Villegas Castro</strong>. Senior DevOps &amp; Cloud Infrastructure Engineer con más de 8 años de experiencia. Especializado en IaC con Terraform, Kubernetes (EKS), observabilidad end-to-end y seguridad en el ecosistema AWS.</span>
-                <span class="lang-en">Hi, I'm <strong>Santiago Villegas Castro</strong>. Senior DevOps &amp; Cloud Infrastructure Engineer with 8+ years of experience. Specialized in IaC with Terraform, Kubernetes (EKS), end-to-end observability, and security across the AWS ecosystem.</span>
-            </p>
-            
-            <div class="flex flex-wrap gap-4 pt-2">
-                <a href="#contact" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 px-6 py-3 rounded font-bold transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.25)]">
-                    <i class="fa-solid fa-envelope"></i> 
-                    <span class="lang-es">Contactar</span><span class="lang-en">Get in Touch</span>
-                </a>
-                <a href="https://linkedin.com/in/santiago-villegas-castro-06175a9b/" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded font-bold border border-slate-700 transition-all flex items-center gap-2">
-                    <i class="fa-brands fa-linkedin text-cyan-400"></i> LinkedIn
-                </a>
-                <a href="tel:+573113653833" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-3 rounded border border-slate-700 transition-all flex items-center gap-2 font-mono text-sm">
-                    <i class="fa-solid fa-phone text-emerald-400"></i> +57 311 365 38 33
-                </a>
-            </div>
+      <div class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-role"><span class="lang-es">Líder de Infraestructura</span><span class="lang-en">Infrastructure Lead</span></span>
+          <span class="exp-dates">Ene 2023 – Oct 2024</span>
         </div>
-        
-        <!-- Terminal Decorativa -->
-        <div class="flex-1 w-full bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-2xl font-mono text-sm">
-            <div class="bg-slate-850 px-4 py-3 flex items-center justify-between border-b border-slate-800">
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                </div>
-                <span class="text-xs text-slate-500">santiago@ubuntu: ~/infrastructure</span>
-            </div>
-            <div class="p-6 text-slate-300 space-y-3">
-                <p><span class="text-emerald-400">santiago@ubuntu:~$</span> terraform plan -out=tfplan</p>
-                <p class="text-slate-500">Plan: 50+ microservices on Amazon EKS, OTel, API Gateway VPC Link.</p>
-                <p><span class="text-emerald-400">santiago@ubuntu:~$</span> terraform apply tfplan</p>
-                <p class="text-cyan-400">Apply complete! Resources: 12 added, 0 changed, 0 destroyed.</p>
-                <p class="text-emerald-500 font-semibold">[SUCCESS] Cloud costs reduced by 30% (~$1,200/mo).</p>
-                <p class="text-emerald-500 font-semibold">[SUCCESS] Deployment times reduced by 75%.</p>
-                <p><span class="text-emerald-400">santiago@ubuntu:~$</span> <span class="animate-pulse">_</span></p>
-            </div>
+        <div class="exp-company">F2X · Flypass</div>
+        <ul class="lang-es">
+          <li>Lideré el equipo de ingeniería: definición de roadmap, mentoring y adopción del AWS Well-Architected Framework.</li>
+          <li>Reduje los costos cloud en un <b>30%</b> (~$1,200/mes) mediante rightsizing, Savings Plans y limpieza de recursos.</li>
+          <li>Estandaricé la infraestructura como módulos Terraform reutilizables con versionado semántico.</li>
+          <li>Implementé una estrategia de observabilidad centralizada cubriendo métricas, logs y alertas para toda la plataforma.</li>
+        </ul>
+        <ul class="lang-en">
+          <li>Led the engineering team: roadmap definition, mentoring, and adoption of the AWS Well-Architected Framework.</li>
+          <li>Reduced cloud costs by <b>30%</b> (~$1,200/month) through rightsizing, Savings Plans, and resource cleanup.</li>
+          <li>Standardized infrastructure as reusable Terraform modules with semantic versioning.</li>
+          <li>Implemented a centralized observability strategy covering metrics, logs, and alerting for the entire platform.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-role">DevOps &amp; System Engineer</span>
+          <span class="exp-dates">Ago 2019 – Ene 2023</span>
         </div>
-    </section>
+        <div class="exp-company">S4N / EPAM</div>
+        <ul class="lang-es">
+          <li>Diseñé infraestructura de alta disponibilidad para múltiples clientes siguiendo el framework AWS Well-Architected.</li>
+          <li>Administré entornos de servidores Linux vía CLI, gestionando configuraciones de red, procesos del sistema y resolución de problemas de rendimiento.</li>
+          <li>Construí pipelines CI/CD y adopté prácticas GitOps usando Jenkins y Bitbucket Pipelines.</li>
+          <li>Implementé controles de seguridad cloud (Security Hub, Macie, Inspector, Config y CloudTrail).</li>
+        </ul>
+        <ul class="lang-en">
+          <li>Designed High Availability infrastructure for multiple clients following the AWS Well-Architected framework.</li>
+          <li>Administered Linux server environments via CLI, managing network configurations, system processes, and performance troubleshooting.</li>
+          <li>Built CI/CD pipelines and adopted GitOps practices using Jenkins and Bitbucket Pipelines.</li>
+          <li>Implemented cloud security controls (Security Hub, Macie, Inspector, Config, and CloudTrail).</li>
+        </ul>
+      </div>
 
-    <!-- Sobre Mí (Bento Grid) -->
-    <section id="about" class="py-20 bg-slate-850 border-y border-slate-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-2">
-                <span class="lang-es">Sobre Mí</span><span class="lang-en">About Me</span>
-            </h2>
-            <p class="text-slate-400 mb-10">
-                <span class="lang-es">Ingeniería de infraestructura Cloud y equilibrio personal.</span>
-                <span class="lang-en">Cloud infrastructure engineering grounded in strategic balance.</span>
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Profesional -->
-                <div class="md:col-span-2 bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-lg">
-                    <div class="text-cyan-400 text-2xl mb-3"><i class="fa-solid fa-cubes-stacked"></i></div>
-                    <h3 class="text-xl font-bold mb-4">
-                        <span class="lang-es">Perfil Profesional</span><span class="lang-en">Professional Profile</span>
-                    </h3>
-                    <div class="space-y-4 text-slate-300 leading-relaxed">
-                        <p class="lang-es">
-                            Ingeniero Senior con más de 8 años de experiencia diseñando, automatizando y escalando infraestructura Cloud en AWS. Especializado en Infraestructura como Código (IaC) con Terraform, arquitecturas de microservicios sobre Amazon EKS, seguridad y observabilidad.
-                        </p>
-                        <p class="lang-es">
-                            He liderado exitosamente la migración de stacks tecnológicos complejos, permitiendo el crecimiento sostenible de plataformas y reduciendo costos operativos hasta en un 30% mediante una visión estratégica combinada con ejecución técnica hands-on.
-                        </p>
-                        <p class="lang-en">
-                            Senior Engineer with 8+ years of experience designing, automating, and scaling cloud infrastructure on AWS. Specialized in IaC with Terraform, microservices architectures on EKS, security, and observability.
-                        </p>
-                        <p class="lang-en">
-                            I have led the migration of complex tech stacks, enabling platform growth and reducing cloud costs by 30% through strategic vision and hands-on execution.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Lado Personal -->
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-lg flex flex-col justify-between">
-                    <div>
-                        <div class="text-amber-500 text-2xl mb-3"><i class="fa-solid fa-heart"></i></div>
-                        <h3 class="text-xl font-bold mb-4">
-                            <span class="lang-es">Fuera de la Terminal</span><span class="lang-en">Off the Terminal</span>
-                        </h3>
-                        <ul class="space-y-4 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-gamepad text-cyan-400 text-lg mt-0.5"></i>
-                                <div>
-                                    <strong class="block text-slate-100">Gaming Enthusiast</strong>
-                                    <span class="text-slate-400">PC Gaming, Xbox &amp; Nintendo Switch.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-chess-board text-amber-400 text-lg mt-0.5"></i>
-                                <div>
-                                    <strong class="block text-slate-100">Tabletop Board Games</strong>
-                                    <span class="text-slate-400 lang-es">Colección de juegos estratégicos y cooperativos.</span>
-                                    <span class="text-slate-400 lang-en">Strategic &amp; cooperative board game collector.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-dog text-emerald-400 text-lg mt-0.5"></i>
-                                <div>
-                                    <strong class="block text-slate-100">Vida Familiar</strong>
-                                    <span class="text-slate-400 lang-es">Tiempo de calidad en casa con mi esposa Meli y nuestros dos perros, Hana y Kuma.</span>
-                                    <span class="text-slate-400 lang-en">Quality home time with my wife Meli and our two dogs, Hana and Kuma.</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs font-mono text-slate-400 flex items-center gap-2">
-                        <i class="fa-solid fa-location-dot text-red-400"></i> Medellín, Colombia
-                    </div>
-                </div>
-            </div>
+      <div class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-role">Junior DevOps Engineer</span>
+          <span class="exp-dates">Mar 2019 – Ago 2019</span>
         </div>
-    </section>
+        <div class="exp-company">Copa Airlines · S4N</div>
+        <ul class="lang-es">
+          <li>Implementé infraestructura HA (VPC, EC2, ALB, CodeDeploy) y pipelines para aplicaciones Java.</li>
+        </ul>
+        <ul class="lang-en">
+          <li>Implemented HA infrastructure (VPC, EC2, ALB, CodeDeploy) and pipelines for Java applications.</li>
+        </ul>
+      </div>
 
-    <!-- Certificaciones -->
-    <section id="certs" class="py-16 max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-2">
-            <span class="lang-es">Certificaciones</span><span class="lang-en">Certifications</span>
-        </h2>
-        <p class="text-slate-400 mb-8">
-            <span class="lang-es">Acreditaciones oficiales en tecnologías Cloud, IaC y Ciberseguridad.</span>
-            <span class="lang-en">Official credentials in Cloud technologies, IaC, and Cybersecurity.</span>
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 flex items-center gap-4">
-                <div class="p-3 bg-amber-500/10 text-amber-500 rounded-lg text-2xl"><i class="fa-brands fa-aws"></i></div>
-                <div>
-                    <h4 class="font-bold text-sm">AWS Dev Associate</h4>
-                    <p class="text-xs text-slate-400">Amazon Web Services</p>
-                </div>
-            </div>
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 flex items-center gap-4">
-                <div class="p-3 bg-purple-500/10 text-purple-400 rounded-lg text-2xl"><i class="fa-solid fa-cubes"></i></div>
-                <div>
-                    <h4 class="font-bold text-sm">Terraform Associate</h4>
-                    <p class="text-xs text-slate-400">HashiCorp</p>
-                </div>
-            </div>
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 flex items-center gap-4">
-                <div class="p-3 bg-cyan-500/10 text-cyan-400 rounded-lg text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
-                <div>
-                    <h4 class="font-bold text-sm">Ciberseguridad TI</h4>
-                    <p class="text-xs text-slate-400">IT Security Certification</p>
-                </div>
-            </div>
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 flex items-center gap-4">
-                <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg text-2xl"><i class="fa-solid fa-user-ninja"></i></div>
-                <div>
-                    <h4 class="font-bold text-sm">Ethical Hacking</h4>
-                    <p class="text-xs text-slate-400">Security Fundamentals</p>
-                </div>
-            </div>
+      <div class="exp-card reveal">
+        <div class="exp-head">
+          <span class="exp-role">Junior DevOps Engineer</span>
+          <span class="exp-dates">Ago 2017 – Feb 2019</span>
         </div>
-    </section>
+        <div class="exp-company">VirtualBeans</div>
+        <ul class="lang-es">
+          <li>Desplegué y administré infraestructura básica en AWS basada en Linux (EC2, HAProxy) vía CLI; construí pipelines de despliegue con Jenkins.</li>
+        </ul>
+        <ul class="lang-en">
+          <li>Deployed and administered Linux-based AWS infrastructure (EC2, HAProxy) via CLI; built deployment pipelines with Jenkins.</li>
+        </ul>
+      </div>
 
-    <!-- Stack Tecnológico -->
-    <section id="stack" class="py-20 bg-slate-850 border-y border-slate-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-2">Tech Stack &amp; Skills</h2>
-            <p class="text-slate-400 mb-10">
-                <span class="lang-es">Herramientas y tecnologías que utilizo en producción.</span>
-                <span class="lang-en">Production-grade tools and technologies in my workflow.</span>
-            </p>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cloud & IaC -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-cloud"></i> Cloud &amp; IaC
-                    </h4>
-                    <p class="text-sm text-slate-300 font-mono leading-relaxed">
-                        AWS (EKS, ECS, Lambda, API Gateway, Organizations, IAM), Terraform, Terraform Cloud.
-                    </p>
-                </div>
-
-                <!-- CI/CD & GitOps -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-code-branch"></i> CI/CD &amp; GitOps
-                    </h4>
-                    <p class="text-sm text-slate-300 font-mono leading-relaxed">
-                        GitHub Actions, Jenkins, Bitbucket Pipelines, ArgoCD, Helm.
-                    </p>
-                </div>
-
-                <!-- Observabilidad -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line"></i> Observabilidad
-                    </h4>
-                    <p class="text-sm text-slate-300 font-mono leading-relaxed">
-                        Grafana, Prometheus, OpenTelemetry (OTel), CloudWatch, AWS X-Ray.
-                    </p>
-                </div>
-
-                <!-- Seguridad -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-shield-cat"></i> Seguridad Cloud
-                    </h4>
-                    <p class="text-sm text-slate-300 font-mono leading-relaxed">
-                        mTLS, AWS WAF, Security Hub, Macie, Inspector, Config, CloudTrail, SonarCloud.
-                    </p>
-                </div>
-
-                <!-- Scripting & OS -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-terminal"></i> Scripting &amp; OS
-                    </h4>
-                    <p class="text-sm text-slate-300 font-mono leading-relaxed">
-                        Linux (CLI Administration), Bash, Python, Groovy, HCL, YAML, Node.js.
-                    </p>
-                </div>
-
-                <!-- Idiomas -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <h4 class="font-bold text-lg mb-4 text-cyan-400 flex items-center gap-2">
-                        <i class="fa-solid fa-language"></i> Idiomas / Languages
-                    </h4>
-                    <div class="text-sm text-slate-300 space-y-1">
-                        <p><strong>Español:</strong> Nativo</p>
-                        <p><strong>Inglés:</strong> Intermedio (Técnico avanzado)</p>
-                    </div>
-                </div>
-            </div>
+    <div class="edu-cert-grid">
+      <div class="reveal">
+        <div class="mini-card-title"><span class="lang-es">Educación</span><span class="lang-en">Education</span></div>
+        <ul class="mini-list">
+          <li>
+            <div class="deg lang-es">Ingeniería Informática</div>
+            <div class="deg lang-en">Software Engineering</div>
+            <div class="inst"><span class="lang-es">Universidad Católica del Norte</span><span class="lang-en">Catholic University of the North</span> · 2018–2022</div>
+          </li>
+          <li>
+            <div class="deg lang-es">Tecnología en Sistematización de Datos</div>
+            <div class="deg lang-en">Systems Automation Technology</div>
+            <div class="inst">Politécnico JIC · 2015–2017</div>
+          </li>
+          <li>
+            <div class="deg lang-es">Técnico en Programación de Sistemas</div>
+            <div class="deg lang-en">Systems Programming Technician</div>
+            <div class="inst">Politécnico JIC · 2013–2015</div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="mini-card-title"><span class="lang-es">Certificaciones</span><span class="lang-en">Certifications</span></div>
+        <div class="cert-badges">
+          <span class="cert-badge">AWS Developer Associate</span>
+          <span class="cert-badge">Terraform Associate</span>
+          <span class="cert-badge lang-es">Ciberseguridad TI</span>
+          <span class="cert-badge lang-en">IT Cybersecurity</span>
+          <span class="cert-badge">Ethical Hacking</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Experiencia Profesional -->
-    <section id="experience" class="py-20 max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-2">
-            <span class="lang-es">Experiencia Laboral</span><span class="lang-en">Work Experience</span>
-        </h2>
-        <p class="text-slate-400 mb-12">
-            <span class="lang-es">Trayectoria profesional en arquitectura Cloud, migración e infraestructura.</span>
-            <span class="lang-en">Track record in Cloud architecture, migration, and infrastructure.</span>
-        </p>
+<!-- ================= STACK ================= -->
+<section class="stack" id="stack">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Stack</span>
+      <h2><span class="lang-es">Stack Tecnológico</span><span class="lang-en">Tech Stack</span></h2>
+      <p class="lang-es">Las herramientas con las que diseño, automatizo y opero infraestructura a diario.</p>
+      <p class="lang-en">The tools I use to design, automate, and operate infrastructure every day.</p>
+    </div>
 
-        <div class="border-l-2 border-slate-700 ml-4 pl-6 space-y-12">
-            
-            <!-- Rol 1 -->
-            <div class="relative">
-                <div class="absolute w-4 h-4 bg-cyan-500 rounded-full -left-[33px] top-1 border-4 border-slate-900"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 class="text-xl font-bold">
-                        <span class="lang-es">Senior Ingeniero de Infraestructura</span>
-                        <span class="lang-en">Senior Infrastructure Engineer</span> 
-                        <span class="text-cyan-400">@ F2X - Flypass</span>
-                    </h3>
-                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-3 py-1 rounded border border-slate-700 w-fit">
-                        Oct 2024 – Abr 2026
-                    </span>
-                </div>
-                <ul class="list-disc list-outside text-slate-300 space-y-2 ml-4 text-sm leading-relaxed">
-                    <li class="lang-es">Lideré la migración de monolito a microservicios sobre Amazon EKS con observabilidad end-to-end (Grafana, Prometheus, OTel) para 50+ servicios.</li>
-                    <li class="lang-es">Optimicé el tráfico interno vía API Gateway VPC Link + ALB Controller, eliminando latencia y puntos de falla.</li>
-                    <li class="lang-es">Reduje los tiempos de deploy en un 75% mediante la reestructuración de pipelines en GitHub Actions con paralelización y cacheo.</li>
-                    <li class="lang-es">Implementé automatizaciones self-service (Slack + AWS) y desarrollé un agente de IA en Jira para triaje de infraestructura.</li>
-                    <li class="lang-es">Gestioné arquitectura multi-cuenta con AWS Organizations e IAM federado para entornos de Prod, Cert y QA.</li>
-
-                    <li class="lang-en">Led the migration from monolith to microservices on Amazon EKS with end-to-end observability (Grafana, Prometheus, OTel) for 50+ services.</li>
-                    <li class="lang-en">Optimized internal traffic via API Gateway VPC Link + ALB Controller, eliminating latency and points of failure.</li>
-                    <li class="lang-en">Reduced deployment times by 75% by restructuring GitHub Actions pipelines with parallelization and caching.</li>
-                    <li class="lang-en">Implemented self-service automations (Slack + AWS) and developed an AI agent in Jira for infrastructure triage.</li>
-                    <li class="lang-en">Managed multi-account architecture using AWS Organizations and federated IAM for Prod, Cert, and QA environments.</li>
-                </ul>
-            </div>
-
-            <!-- Rol 2 -->
-            <div class="relative">
-                <div class="absolute w-4 h-4 bg-cyan-500/70 rounded-full -left-[33px] top-1 border-4 border-slate-900"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 class="text-xl font-bold">
-                        <span class="lang-es">Líder de Infraestructura</span>
-                        <span class="lang-en">Infrastructure Lead</span> 
-                        <span class="text-cyan-400">@ F2X - Flypass</span>
-                    </h3>
-                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-3 py-1 rounded border border-slate-700 w-fit">
-                        Ene 2023 – Oct 2024
-                    </span>
-                </div>
-                <ul class="list-disc list-outside text-slate-300 space-y-2 ml-4 text-sm leading-relaxed">
-                    <li class="lang-es">Lideré el equipo de ingeniería: definición de roadmap, mentoring y adopción del AWS Well-Architected Framework.</li>
-                    <li class="lang-es">Reduje los costos cloud en un 30% (~$1,200/mes) mediante rightsizing, Savings Plans y limpieza de recursos.</li>
-                    <li class="lang-es">Estandaricé la infraestructura como módulos Terraform reutilizables con versionado semántico.</li>
-                    <li class="lang-es">Implementé una estrategia de observabilidad centralizada cubriendo métricas, logs y alertas para toda la plataforma.</li>
-
-                    <li class="lang-en">Led the engineering team: roadmap definition, mentoring, and adoption of AWS Well-Architected Framework.</li>
-                    <li class="lang-en">Reduced cloud costs by 30% (~$1,200/month) through rightsizing, Savings Plans, and resource cleanup.</li>
-                    <li class="lang-en">Standardized infrastructure as reusable Terraform modules with semantic versioning.</li>
-                    <li class="lang-en">Implemented a centralized observability strategy covering metrics, logs, and alerting for the entire platform.</li>
-                </ul>
-            </div>
-
-            <!-- Rol 3 -->
-            <div class="relative">
-                <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[33px] top-1 border-4 border-slate-900"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 class="text-xl font-bold">
-                        DevOps &amp; System Engineer 
-                        <span class="text-cyan-400">@ S4N / EPAM</span>
-                    </h3>
-                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-3 py-1 rounded border border-slate-700 w-fit">
-                        Ago 2019 – Ene 2023
-                    </span>
-                </div>
-                <ul class="list-disc list-outside text-slate-300 space-y-2 ml-4 text-sm leading-relaxed">
-                    <li class="lang-es">Diseñé infraestructura de alta disponibilidad para múltiples clientes siguiendo el framework AWS Well-Architected.</li>
-                    <li class="lang-es">Administré entornos de servidores Linux vía CLI, gestionando configuraciones de red, procesos del sistema y resolución de problemas de rendimiento.</li>
-                    <li class="lang-es">Construí pipelines CI/CD y adopté prácticas GitOps usando Jenkins y Bitbucket Pipelines.</li>
-                    <li class="lang-es">Implementé controles de seguridad cloud (Security Hub, Macie, Inspector, Config y CloudTrail).</li>
-
-                    <li class="lang-en">Designed High Availability infrastructure for multiple clients following the AWS Well-Architected framework.</li>
-                    <li class="lang-en">Administered Linux server environments via CLI, managing network configurations, system processes, and performance troubleshooting.</li>
-                    <li class="lang-en">Built CI/CD pipelines and adopted GitOps practices using Jenkins and Bitbucket Pipelines.</li>
-                    <li class="lang-en">Implemented cloud security controls (Security Hub, Macie, Inspector, Config, and CloudTrail).</li>
-                </ul>
-            </div>
-
-            <!-- Rol 4 -->
-            <div class="relative">
-                <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[33px] top-1 border-4 border-slate-900"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 class="text-xl font-bold">
-                        Junior DevOps Engineer 
-                        <span class="text-cyan-400">@ Copa Airlines - S4N</span>
-                    </h3>
-                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-3 py-1 rounded border border-slate-700 w-fit">
-                        Mar 2019 – Ago 2019
-                    </span>
-                </div>
-                <ul class="list-disc list-outside text-slate-300 space-y-2 ml-4 text-sm leading-relaxed">
-                    <li class="lang-es">Implementé infraestructura HA (VPC, EC2, ALB, CodeDeploy) y pipelines para aplicaciones Java.</li>
-                    <li class="lang-en">Implemented HA infrastructure (VPC, EC2, ALB, CodeDeploy) and pipelines for Java applications.</li>
-                </ul>
-            </div>
-
-            <!-- Rol 5 -->
-            <div class="relative">
-                <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[33px] top-1 border-4 border-slate-900"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 class="text-xl font-bold">
-                        Junior DevOps Engineer 
-                        <span class="text-cyan-400">@ VirtualBeans</span>
-                    </h3>
-                    <span class="text-xs font-mono bg-slate-800 text-slate-400 px-3 py-1 rounded border border-slate-700 w-fit">
-                        Ago 2017 – Feb 2019
-                    </span>
-                </div>
-                <ul class="list-disc list-outside text-slate-300 space-y-2 ml-4 text-sm leading-relaxed">
-                    <li class="lang-es">Desplegué y administré infraestructura básica en AWS basada en Linux (EC2, HAProxy) vía CLI; construí pipelines de despliegue con Jenkins.</li>
-                    <li class="lang-en">Deployed and administered Linux-based AWS infrastructure (EC2, HAProxy) via CLI; built deployment pipelines with Jenkins.</li>
-                </ul>
-            </div>
-
+    <div class="stack-grid">
+      <div class="stack-card reveal">
+        <div class="stack-card-head">
+          <div class="stack-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>
+          <h3>Cloud &amp; IaC</h3>
         </div>
-    </section>
-
-    <!-- Educación -->
-    <section class="py-16 bg-slate-850 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8">
-                <span class="lang-es">Educación</span><span class="lang-en">Education</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <span class="text-xs font-mono text-cyan-400">2018 – 2022</span>
-                    <h3 class="font-bold text-lg mt-1">Ingeniería Informática</h3>
-                    <p class="text-slate-400 text-sm">Universidad Católica del Norte</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <span class="text-xs font-mono text-cyan-400">2015 – 2017</span>
-                    <h3 class="font-bold text-lg mt-1">Tecnología en Sistematización de Datos</h3>
-                    <p class="text-slate-400 text-sm">Politécnico Colombiano JIC</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <span class="text-xs font-mono text-cyan-400">2013 – 2015</span>
-                    <h3 class="font-bold text-lg mt-1">Técnico en Programación de Sistemas</h3>
-                    <p class="text-slate-400 text-sm">Politécnico Colombiano JIC</p>
-                </div>
-            </div>
+        <div class="stack-tags">
+          <span class="stack-tag">AWS EKS</span><span class="stack-tag">ECS</span><span class="stack-tag">Lambda</span>
+          <span class="stack-tag">API Gateway</span><span class="stack-tag">Organizations</span><span class="stack-tag">IAM</span>
+          <span class="stack-tag">Terraform</span><span class="stack-tag">Terraform Cloud</span>
         </div>
-    </section>
+      </div>
 
-    <!-- Contacto -->
-    <section id="contact" class="py-20 px-4 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-4">
-            <span class="lang-es">¿Conectamos?</span><span class="lang-en">Let's Connect</span>
-        </h2>
-        <p class="text-slate-400 mb-8 max-w-xl mx-auto">
-            <span class="lang-es">Actualmente abierto a nuevas oportunidades profesionales y proyectos en infraestructura Cloud / DevOps.</span>
-            <span class="lang-en">Currently open to new career opportunities and Cloud / DevOps infrastructure projects.</span>
-        </p>
+      <div class="stack-card reveal">
+        <div class="stack-card-head">
+          <div class="stack-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+          <h3>CI/CD &amp; GitOps</h3>
+        </div>
+        <div class="stack-tags">
+          <span class="stack-tag">GitHub Actions</span><span class="stack-tag">Jenkins</span>
+          <span class="stack-tag">Bitbucket Pipelines</span><span class="stack-tag">ArgoCD</span><span class="stack-tag">Helm</span>
+        </div>
+      </div>
 
-        <form action="mailto:santivicastro18@gmail.com" method="post" enctype="text/plain" class="bg-slate-800 p-8 rounded-2xl border border-slate-700 text-left space-y-4 shadow-xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">
-                        <span class="lang-es">Nombre completo</span><span class="lang-en">Full Name</span>
-                    </label>
-                    <input type="text" name="Name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-cyan-500 text-slate-50" placeholder="Ej. Alex Smith">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">
-                        <span class="lang-es">Correo electrónico</span><span class="lang-en">Email Address</span>
-                    </label>
-                    <input type="email" name="Email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-cyan-500 text-slate-50" placeholder="alex@empresa.com">
-                </div>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1">
-                    <span class="lang-es">Mensaje</span><span class="lang-en">Message</span>
-                </label>
-                <textarea name="Message" rows="4" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-cyan-500 text-slate-50" placeholder="¿En qué puedo ayudarte?"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 rounded-lg transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <span class="lang-es">Enviar Mensaje <i class="fa-solid fa-paper-plane ml-2"></i></span>
-                <span class="lang-en">Send Message <i class="fa-solid fa-paper-plane ml-2"></i></span>
-            </button>
-        </form>
-    </section>
+      <div class="stack-card reveal">
+        <div class="stack-card-head">
+          <div class="stack-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+          <h3><span class="lang-es">Observabilidad</span><span class="lang-en">Observability</span></h3>
+        </div>
+        <div class="stack-tags">
+          <span class="stack-tag">Grafana</span><span class="stack-tag">Prometheus</span>
+          <span class="stack-tag">OpenTelemetry</span><span class="stack-tag">CloudWatch</span><span class="stack-tag">X-Ray</span>
+        </div>
+      </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 py-8 text-center text-slate-500 text-sm border-t border-slate-800">
-        <p>
-            &copy; <span id="year"></span> Santiago Villegas Castro. 
-            <span class="lang-es">Medellín, Colombia.</span>
-        </p>
-    </footer>
+      <div class="stack-card reveal">
+        <div class="stack-card-head">
+          <div class="stack-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg></div>
+          <h3><span class="lang-es">Seguridad</span><span class="lang-en">Security</span></h3>
+        </div>
+        <div class="stack-tags">
+          <span class="stack-tag">mTLS</span><span class="stack-tag">AWS WAF</span><span class="stack-tag">Security Hub</span>
+          <span class="stack-tag">Macie</span><span class="stack-tag">SonarCloud</span>
+        </div>
+      </div>
 
-    <!-- Script de Cambio de Idioma -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+      <div class="stack-card reveal">
+        <div class="stack-card-head">
+          <div class="stack-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-6-6-6"></path><path d="M12 19h8"></path></svg></div>
+          <h3><span class="lang-es">Scripting &amp; OS</span><span class="lang-en">Scripting &amp; OS</span></h3>
+        </div>
+        <div class="stack-tags">
+          <span class="stack-tag">Linux (CLI)</span><span class="stack-tag">Bash</span><span class="stack-tag">Python</span>
+          <span class="stack-tag">Groovy</span><span class="stack-tag">HCL</span><span class="stack-tag">YAML</span><span class="stack-tag">Node.js</span>
+        </div>
+      </div>
+    </div>
 
-        const langToggle = document.getElementById('langToggle');
-        const body = document.body;
+    <div class="lang-row reveal">
+      <span class="lang-chip lang-es"><b>Español</b> — Nativo</span>
+      <span class="lang-chip lang-en"><b>Spanish</b> — Native</span>
+      <span class="lang-chip lang-es"><b>Inglés</b> — Intermedio (técnico avanzado)</span>
+      <span class="lang-chip lang-en"><b>English</b> — Intermediate (advanced technical)</span>
+    </div>
+  </div>
+</section>
 
-        langToggle.addEventListener('click', () => {
-            body.classList.toggle('english-mode');
-        });
-    </script>
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></span>
+      <h2><span class="lang-es">¿Hablamos?</span><span class="lang-en">Let's talk</span></h2>
+      <p class="lang-es">Si buscas a alguien que combine experiencia técnica en la nube con una mentalidad de mejora continua, escríbeme. Respondo rápido.</p>
+      <p class="lang-en">If you're looking for someone who combines hands-on cloud experience with a continuous-improvement mindset, reach out — I respond quickly.</p>
+    </div>
+
+    <div class="contact-grid">
+      <form id="contact-form" class="reveal">
+        <div class="form-field">
+          <label class="lang-es">Nombre</label><label class="lang-en">Name</label>
+          <input type="text" id="cf-name" required>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="cf-email" required>
+        </div>
+        <div class="form-field">
+          <label class="lang-es">Mensaje</label><label class="lang-en">Message</label>
+          <textarea id="cf-message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <span class="lang-es">Enviar mensaje</span><span class="lang-en">Send message</span>
+        </button>
+      </form>
+
+      <div class="contact-card reveal">
+        <a class="contact-link" href="mailto:santivicastro18@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"></path><path d="m4 6 8 7 8-7"></path><rect x="3" y="5" width="18" height="14" rx="2"></rect></svg>
+          santivicastro18@gmail.com
+        </a>
+        <a class="contact-link wa-link" href="https://wa.me/573113653833" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-4.95A8.5 8.5 0 1 1 8.5 19.35Z"></path><path d="M8.5 9.5c0 3 2.5 6 6 6 .8 0 1.5-.3 1.9-.9l-.4-1.7-2.1-.6-1 1.1a5 5 0 0 1-2.6-2.6l1.1-1-.6-2.1-1.7-.4c-.6.4-.9 1.1-.9 1.9-.1.1-.1.2-.1.3Z" fill="currentColor" stroke="none"></path></svg>
+          <span class="lang-es">WhatsApp — habla conmigo</span><span class="lang-en">WhatsApp — chat with me</span>
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/santiagovillegas-castro-06175a9b/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="https://github.com/svillegasc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.7 2.8 5.6 3.1 5.6 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+          GitHub
+        </a>
+        <div class="contact-link" style="border-bottom:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 4 3 7.3 7 7.9V13H9v-3h2V8.5C11 6.6 12.2 5.5 14 5.5c.8 0 1.6.1 1.6.1v2h-1c-.9 0-1.2.6-1.2 1.2V10h2.1l-.3 3H13.4v4.9c4-.6 7-3.9 7-7.9Z"></path></svg>
+          <span class="lang-es">Medellín, Colombia</span><span class="lang-en">Medellín, Colombia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© <span id="year"></span> Santiago Villegas Castro</p>
+    <div class="foot-links">
+      <a href="mailto:santivicastro18@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/santiagovillegas-castro-06175a9b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/svillegasc" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function setLang(lang){
+    document.body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    var cvFile = lang === 'es' ? 'CV_SANTIAGO_VILLEGAS_ES.pdf' : 'CV_SANTIAGO_VILLEGAS_EN.pdf';
+    document.querySelectorAll('.cv-link').forEach(function(el){ el.setAttribute('href', cvFile); });
+    var waText = lang === 'es'
+      ? 'Hola Santiago, vi tu portafolio y me gustaría hablar contigo.'
+      : "Hi Santiago, I saw your portfolio and I'd like to talk to you.";
+    document.querySelectorAll('.wa-link').forEach(function(el){
+      el.setAttribute('href', 'https://wa.me/573113653833?text=' + encodeURIComponent(waText));
+    });
+  }
+
+  // header scroll state
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // mobile nav
+  function toggleMobileNav(open){
+    document.getElementById('mobile-nav').classList.toggle('open', open);
+  }
+
+  // scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  // contact form -> mailto
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('cf-name').value;
+    var email = document.getElementById('cf-email').value;
+    var message = document.getElementById('cf-message').value;
+    var subject = encodeURIComponent('Contacto desde portafolio — ' + name);
+    var body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:santivicastro18@gmail.com?subject=' + subject + '&body=' + body;
+  });
+
+  // set initial CV/WhatsApp links on load
+  setLang('es');
+</script>
 </body>
 </html>
