@@ -27,15 +27,40 @@
   }, { threshold: 0.15 });
   revealEls.forEach(function(el){ io.observe(el); });
 
-  // contact form -> mailto
-  document.getElementById('contact-form').addEventListener('submit', function(e){
+  // contact form -> Web3Forms (email never appears in client-side code)
+  var form = document.getElementById('contact-form');
+  var statusEl = document.getElementById('form-status');
+  var submitBtn = document.getElementById('cf-submit');
+
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
-    var name = document.getElementById('cf-name').value;
-    var email = document.getElementById('cf-email').value;
-    var message = document.getElementById('cf-message').value;
-    var subject = encodeURIComponent('Contacto desde portafolio — ' + name);
-    var body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
-    window.location.href = 'mailto:santivicastro18@gmail.com?subject=' + subject + '&body=' + body;
+    var lang = document.body.getAttribute('data-lang');
+    submitBtn.disabled = true;
+    statusEl.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
+    statusEl.className = 'form-status form-status-pending';
+
+    try{
+      var response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      var result = await response.json();
+      if(result.success){
+        statusEl.textContent = lang === 'es' ? '¡Mensaje enviado! Te responderé pronto.' : "Message sent! I'll get back to you soon.";
+        statusEl.className = 'form-status form-status-ok';
+        form.reset();
+      } else {
+        throw new Error(result.message || 'submission failed');
+      }
+    } catch(err){
+      statusEl.textContent = lang === 'es'
+        ? 'No se pudo enviar. Intenta de nuevo o escríbeme por LinkedIn.'
+        : "Couldn't send it. Please try again or reach out on LinkedIn.";
+      statusEl.className = 'form-status form-status-error';
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 
   // set initial CV link on load

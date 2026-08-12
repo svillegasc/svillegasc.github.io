@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Santiago Villegas Castro | Senior DevOps & Cloud Infrastructure Engineer</title>
 <meta name="description" content="Ingeniero Senior con más de 8 años de experiencia en AWS, Kubernetes y Terraform. Portafolio profesional y contacto.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; script-src 'self'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <link rel="stylesheet" href="styles.css">
@@ -346,28 +346,27 @@
 
     <div class="contact-grid">
       <form id="contact-form" class="reveal">
+        <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY_AQUI">
+        <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
         <div class="form-field">
           <label class="lang-es">Nombre</label><label class="lang-en">Name</label>
-          <input type="text" id="cf-name" required>
+          <input type="text" id="cf-name" name="name" required>
         </div>
         <div class="form-field">
           <label>Email</label>
-          <input type="email" id="cf-email" required>
+          <input type="email" id="cf-email" name="email" required>
         </div>
         <div class="form-field">
           <label class="lang-es">Mensaje</label><label class="lang-en">Message</label>
-          <textarea id="cf-message" required></textarea>
+          <textarea id="cf-message" name="message" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="cf-submit">
           <span class="lang-es">Enviar mensaje</span><span class="lang-en">Send message</span>
         </button>
+        <p id="form-status" class="form-status" aria-live="polite"></p>
       </form>
 
       <div class="contact-card reveal">
-        <a class="contact-link" href="mailto:santivicastro18@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"></path><path d="m4 6 8 7 8-7"></path><rect x="3" y="5" width="18" height="14" rx="2"></rect></svg>
-          santivicastro18@gmail.com
-        </a>
         <a class="contact-link" href="https://linkedin.com/in/santiagovillegas-castro-06175a9b/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           LinkedIn
@@ -389,7 +388,6 @@
   <div class="container">
     <p>© <span id="year"></span> Santiago Villegas Castro</p>
     <div class="foot-links">
-      <a href="mailto:santivicastro18@gmail.com">Email</a>
       <a href="https://linkedin.com/in/santiagovillegas-castro-06175a9b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/svillegasc" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>

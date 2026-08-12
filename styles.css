@@ -293,6 +293,11 @@
   }
   .form-field textarea{resize:vertical;min-height:110px;}
   .form-field input::placeholder, .form-field textarea::placeholder{color:#5C6C82;}
+  .hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+  .form-status{min-height:20px;margin-top:12px;font-size:14px;}
+  .form-status-pending{color:#B8C4D6;}
+  .form-status-ok{color:var(--teal);}
+  .form-status-error{color:#F87171;}
   .contact-card{
     background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);
     border-radius:var(--radius);padding:28px;

@@ -20,14 +20,23 @@ Portafolio profesional personal. Sitio estático de una sola página, bilingüe 
 └── fonts/        # Tipografías auto-hospedadas (.woff2)
 ```
 
-> El CV **no** se publica como descarga directa en el sitio (contiene teléfono, email y detalle completo de la trayectoria). Se comparte de forma directa a quien contacte por el formulario, LinkedIn o el email listado.
+> El CV **no** se publica como descarga directa en el sitio (contiene teléfono, email y detalle completo de la trayectoria). Se comparte de forma directa a quien contacte por el formulario o LinkedIn.
+
+## Formulario de contacto
+
+El formulario envía los mensajes vía [Web3Forms](https://web3forms.com) — un relay gratuito (250 envíos/mes en el plan free) que reenvía a la bandeja de entrada configurada **sin exponer el email en el código del sitio**. Solo se expone un "access key" público, que no revela ningún dato personal.
+
+**Antes de publicar:** reemplaza `WEB3FORMS_ACCESS_KEY_AQUI` en `index.html` (input hidden `access_key` dentro de `<form id="contact-form">`) por tu access key real:
+1. Entra a https://web3forms.com y regístrate con tu email (gratis, sin tarjeta).
+2. Confirma el correo de verificación.
+3. Copia el "Access Key" que te dan y pégalo en ese campo.
 
 ## Seguridad
 
 - Content-Security-Policy y Referrer-Policy declaradas en `index.html` (`default-src 'self'`, sin `unsafe-inline`).
-- Sin dependencias de terceros en runtime (fuentes auto-hospedadas).
+- Sin dependencias de terceros en runtime salvo Web3Forms (`connect-src` restringido explícitamente a ese dominio).
 - Enlaces externos con `rel="noopener noreferrer"`.
-- Sin backend ni almacenamiento de datos de visitantes: el formulario de contacto abre el cliente de correo del usuario (`mailto:`), no envía datos a ningún servidor.
+- **Sin email ni teléfono expuestos en el código** — el único canal directo es el formulario (relay externo) y LinkedIn/GitHub.
 - Ningún documento con información personal completa (CV) se sirve públicamente desde el repo.
 
 ## Desarrollo local
