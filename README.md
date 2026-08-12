@@ -44,5 +44,6 @@ Publicado con GitHub Pages directo desde la rama `main`.
 
 ## Contacto
 
+- Email: santivicastro18@gmail.com
 - LinkedIn: [linkedin.com/in/santiagovillegas-castro](https://linkedin.com/in/santiagovillegas-castro-06175a9b/)
 - GitHub: [@svillegasc](https://github.com/svillegasc)
