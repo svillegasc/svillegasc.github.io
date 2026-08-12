@@ -6,6 +6,8 @@
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   }
+  document.getElementById('btn-es').addEventListener('click', function(){ setLang('es'); });
+  document.getElementById('btn-en').addEventListener('click', function(){ setLang('en'); });
 
   // header scroll state
   var header = document.getElementById('site-header');
@@ -17,6 +19,11 @@
   function toggleMobileNav(open){
     document.getElementById('mobile-nav').classList.toggle('open', open);
   }
+  document.getElementById('menu-open-btn').addEventListener('click', function(){ toggleMobileNav(true); });
+  document.getElementById('menu-close-btn').addEventListener('click', function(){ toggleMobileNav(false); });
+  document.querySelectorAll('.mobile-nav a').forEach(function(el){
+    el.addEventListener('click', function(){ toggleMobileNav(false); });
+  });
 
   // scroll reveal
   var revealEls = document.querySelectorAll('.reveal');

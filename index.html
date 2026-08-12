@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Santiago Villegas Castro | Senior DevOps & Cloud Infrastructure Engineer</title>
 <meta name="description" content="Ingeniero Senior con más de 8 años de experiencia en AWS, Kubernetes y Terraform. Portafolio profesional y contacto.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; script-src 'self'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; script-src 'self'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <link rel="stylesheet" href="styles.css">
@@ -24,13 +24,13 @@
     </nav>
     <div class="header-actions">
       <div class="lang-toggle">
-        <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
-        <button id="btn-en" onclick="setLang('en')">EN</button>
+        <button id="btn-es" class="active">ES</button>
+        <button id="btn-en">EN</button>
       </div>
       <a class="btn btn-primary header-cta-btn" href="#contacto">
         <span class="lang-es">Contáctame</span><span class="lang-en">Get in touch</span>
       </a>
-      <button class="menu-toggle" onclick="toggleMobileNav(true)" aria-label="Abrir menú">
+      <button class="menu-toggle" id="menu-open-btn" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -38,12 +38,12 @@
 </header>
 
 <div class="mobile-nav" id="mobile-nav">
-  <button class="close-btn" onclick="toggleMobileNav(false)">&times;</button>
-  <a href="#inicio" onclick="toggleMobileNav(false)"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
-  <a href="#sobre-mi" onclick="toggleMobileNav(false)"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a>
-  <a href="#experiencia" onclick="toggleMobileNav(false)"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a>
-  <a href="#stack" onclick="toggleMobileNav(false)">Stack</a>
-  <a href="#contacto" onclick="toggleMobileNav(false)"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
+  <button class="close-btn" id="menu-close-btn">&times;</button>
+  <a href="#inicio"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+  <a href="#sobre-mi"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a>
+  <a href="#experiencia"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a>
+  <a href="#stack">Stack</a>
+  <a href="#contacto"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a>
 </div>
 
 <!-- ================= HERO ================= -->
@@ -345,8 +345,9 @@
     </div>
 
     <div class="contact-grid">
-      <form id="contact-form" class="reveal">
-        <input type="hidden" name="access_key" value="ba58360c-e987-44fd-ac87-6c5c30f2bd12">
+      <form id="contact-form" class="reveal" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY_AQUI">
+        <input type="hidden" name="redirect" value="https://svillegasc.github.io/#contacto">
         <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
         <div class="form-field">
           <label class="lang-es">Nombre</label><label class="lang-en">Name</label>
