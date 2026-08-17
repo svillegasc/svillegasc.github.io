@@ -1,3 +1,30 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+</head>
+<body data-lang="es">
+
+<slot />
+
+<script is:inline>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   function setLang(lang){
@@ -9,13 +36,11 @@
   document.getElementById('btn-es').addEventListener('click', function(){ setLang('es'); });
   document.getElementById('btn-en').addEventListener('click', function(){ setLang('en'); });
 
-  // header scroll state
   var header = document.getElementById('site-header');
   window.addEventListener('scroll', function(){
     header.classList.toggle('scrolled', window.scrollY > 12);
   });
 
-  // mobile nav
   function toggleMobileNav(open){
     document.getElementById('mobile-nav').classList.toggle('open', open);
   }
@@ -25,7 +50,6 @@
     el.addEventListener('click', function(){ toggleMobileNav(false); });
   });
 
-  // scroll reveal
   var revealEls = document.querySelectorAll('.reveal');
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -34,7 +58,6 @@
   }, { threshold: 0.15 });
   revealEls.forEach(function(el){ io.observe(el); });
 
-  // contact form -> Web3Forms (email never appears in client-side code)
   var form = document.getElementById('contact-form');
   var statusEl = document.getElementById('form-status');
   var submitBtn = document.getElementById('cf-submit');
@@ -70,5 +93,7 @@
     }
   });
 
-  // set initial CV link on load
   setLang('es');
+</script>
+</body>
+</html>

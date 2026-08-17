@@ -1,11 +1,12 @@
 # Santiago Villegas Castro — Portfolio
 
-Portafolio profesional personal. Sitio estático de una sola página, bilingüe (ES/EN), sin frameworks ni build step.
+Portafolio profesional personal. Sitio estático de una sola página, bilingüe (ES/EN), construido con Astro.
 
 🔗 **Live:** https://svillegasc.github.io/
 
 ## Stack
 
+- [Astro](https://astro.build/) — framework estático
 - HTML5 + CSS3 (custom properties, sin frameworks)
 - JavaScript vanilla (toggle de idioma, scroll reveal, formulario de contacto)
 - Tipografía auto-hospedada: Space Grotesk, IBM Plex Sans, IBM Plex Mono (sin dependencias de terceros como Google Fonts)
@@ -14,10 +15,15 @@ Portafolio profesional personal. Sitio estático de una sola página, bilingüe 
 
 ```
 .
-├── index.html    # Marcado del sitio
-├── styles.css    # Estilos
-├── script.js     # Lógica (idioma, scroll reveal, formulario)
-└── fonts/        # Tipografías auto-hospedadas (.woff2)
+├── src/
+│   ├── components/     # Componentes Astro por sección
+│   ├── layouts/        # Layout principal (Layout.astro)
+│   ├── pages/          # Páginas (index.astro)
+│   └── styles/         # Estilos globales (global.css)
+├── public/fonts/       # Tipografías auto-hospedadas (.woff2)
+├── .github/workflows/  # GitHub Actions (deploy automático)
+├── astro.config.mjs    # Configuración de Astro
+└── package.json
 ```
 
 > El CV **no** se publica como descarga directa en el sitio (contiene teléfono, email y detalle completo de la trayectoria). Se comparte de forma directa a quien contacte por el formulario o LinkedIn.
@@ -26,14 +32,9 @@ Portafolio profesional personal. Sitio estático de una sola página, bilingüe 
 
 El formulario envía los mensajes vía [Web3Forms](https://web3forms.com) — un relay gratuito (250 envíos/mes en el plan free) que reenvía a la bandeja de entrada configurada **sin exponer el email en el código del sitio**. Solo se expone un "access key" público, que no revela ningún dato personal.
 
-**Antes de publicar:** reemplaza `WEB3FORMS_ACCESS_KEY_AQUI` en `index.html` (input hidden `access_key` dentro de `<form id="contact-form">`) por tu access key real:
-1. Entra a https://web3forms.com y regístrate con tu email (gratis, sin tarjeta).
-2. Confirma el correo de verificación.
-3. Copia el "Access Key" que te dan y pégalo en ese campo.
-
 ## Seguridad
 
-- Content-Security-Policy y Referrer-Policy declaradas en `index.html` (`default-src 'self'`, sin `unsafe-inline`).
+- Content-Security-Policy y Referrer-Policy declaradas en `Layout.astro` (meta tags).
 - Sin dependencias de terceros en runtime salvo Web3Forms (`connect-src` restringido explícitamente a ese dominio).
 - Enlaces externos con `rel="noopener noreferrer"`.
 - **Sin email ni teléfono expuestos en el código** — el único canal directo es el formulario (relay externo) y LinkedIn/GitHub.
@@ -41,15 +42,22 @@ El formulario envía los mensajes vía [Web3Forms](https://web3forms.com) — un
 
 ## Desarrollo local
 
-No requiere instalación. Basta con abrir `index.html` en el navegador, o servirlo localmente:
+Requiere Node.js >= 22.12.0.
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
 ## Despliegue
 
-Publicado con GitHub Pages directo desde la rama `main`.
+Desplegado automáticamente con GitHub Actions al hacer push a la rama `main`.
+
+1. Instala dependencias: `npm ci`
+2. Build: `npm run build`
+3. Output en `dist/`
+
+El sitio se publica en https://svillegasc.github.io/ via GitHub Pages (source: GitHub Actions).
 
 ## Contacto
 
