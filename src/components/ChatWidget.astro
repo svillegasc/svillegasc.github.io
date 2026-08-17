@@ -1,0 +1,177 @@
+---
+// ChatWidget.astro — AI assistant floating widget
+const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
+---
+
+<div id="chat-widget" class="chat-widget" aria-label="AI Assistant" data-worker-url={WORKER_URL}>
+  <button id="chat-toggle" class="chat-fab" aria-label="Open chat" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+
+  <div id="chat-panel" class="chat-panel" role="dialog" aria-label="Chat with Santiago's assistant" aria-hidden="true">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <span class="chat-header-title lang-es">Asistente de Santiago</span>
+        <span class="chat-header-title lang-en">Santiago's Assistant</span>
+      </div>
+      <button id="chat-close" class="chat-close-btn" aria-label="Close chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div id="chat-limit" class="chat-limit-msg" aria-live="polite" style="display:none">
+      <span class="lang-es">Límite de sesión alcanzado. Recarga para una nueva conversación.</span>
+      <span class="lang-en">Session limit reached. Refresh to start a new conversation.</span>
+    </div>
+    <div class="chat-input-area">
+      <label for="chat-input" class="visually-hidden">Message</label>
+      <input id="chat-input" type="text" maxlength="500" autocomplete="off" placeholder="" disabled>
+      <button id="chat-send" class="chat-send-btn" aria-label="Send message" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var MAX_MESSAGES = 20;
+  var WELCOME_ES = '¡Hola! Soy el asistente de Santiago. Puedo contarte sobre su experiencia, skills o trayectoria profesional. ¿Qué te gustaría saber?';
+  var WELCOME_EN = "Hi! I'm Santiago's assistant. I can tell you about his experience, skills, or career. What would you like to know?";
+  var PLACEHOLDER_ES = 'Pregúntale a Santiago...';
+  var PLACEHOLDER_EN = 'Ask Santiago...';
+
+  var messageCount = 0;
+  var isOpen = false;
+  var isLoading = false;
+
+  var widget = document.getElementById('chat-widget');
+  var toggle = document.getElementById('chat-toggle');
+  var panel = document.getElementById('chat-panel');
+  var messages = document.getElementById('chat-messages');
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  var closeBtn = document.getElementById('chat-close');
+  var limitMsg = document.getElementById('chat-limit');
+
+  var WORKER_URL = widget.getAttribute('data-worker-url');
+  var isConfigured = WORKER_URL.indexOf('YOUR_SUBDOMAIN') === -1;
+
+  if (!isConfigured) {
+    widget.style.display = 'none';
+    return;
+  }
+
+  function getLang() {
+    return document.body.getAttribute('data-lang') || 'es';
+  }
+
+  function updatePlaceholder() {
+    var lang = getLang();
+    input.placeholder = lang === 'es' ? PLACEHOLDER_ES : PLACEHOLDER_EN;
+  }
+
+  function initWelcome() {
+    messages.innerHTML = '';
+    messageCount = 0;
+    var lang = getLang();
+    addMessage(lang === 'es' ? WELCOME_ES : WELCOME_EN, 'bot');
+    updatePlaceholder();
+    input.disabled = false;
+    sendBtn.disabled = false;
+    if (limitMsg) limitMsg.style.display = 'none';
+  }
+
+  function toggleChat() {
+    isOpen = !isOpen;
+    panel.classList.toggle('open', isOpen);
+    panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+    if (isOpen) {
+      if (messages.children.length === 0) initWelcome();
+      input.focus();
+    } else {
+      toggle.focus();
+    }
+  }
+
+  function addMessage(text, role) {
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble chat-bubble-' + role;
+    bubble.textContent = text;
+    messages.appendChild(bubble);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function showLoading() {
+    var el = document.createElement('div');
+    el.className = 'chat-bubble chat-bubble-bot chat-loading';
+    el.id = 'chat-loading';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(el);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function removeLoading() {
+    var el = document.getElementById('chat-loading');
+    if (el) el.remove();
+  }
+
+  async function sendMessage() {
+    if (isLoading || messageCount >= MAX_MESSAGES) return;
+    var text = input.value.trim();
+    if (!text) return;
+
+    var lang = getLang();
+    addMessage(text, 'user');
+    input.value = '';
+    messageCount++;
+    isLoading = true;
+    showLoading();
+
+    try {
+      var res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, lang: lang })
+      });
+      var data = await res.json();
+      removeLoading();
+      if (data.reply) {
+        addMessage(data.reply, 'bot');
+        messageCount++;
+      } else {
+        addMessage(lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.', 'bot');
+      }
+    } catch (err) {
+      removeLoading();
+      addMessage(lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.', 'bot');
+    } finally {
+      isLoading = false;
+      if (messageCount >= MAX_MESSAGES && limitMsg) {
+        limitMsg.style.display = 'block';
+        input.disabled = true;
+        sendBtn.disabled = true;
+      }
+    }
+  }
+
+  toggle.addEventListener('click', toggleChat);
+  closeBtn.addEventListener('click', toggleChat);
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen) toggleChat();
+  });
+
+  initWelcome();
+})();
+</script>

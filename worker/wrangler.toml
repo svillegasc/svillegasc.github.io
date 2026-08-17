@@ -1,0 +1,6 @@
+name = "svillegasc-chat"
+main = "src/index.js"
+compatibility_date = "2026-08-17"
+
+[vars]
+ALLOWED_ORIGIN = "https://svillegasc.github.io"
