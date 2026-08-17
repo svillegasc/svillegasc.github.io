@@ -37,6 +37,14 @@ If someone asks about hiring or working with Santiago, direct them to the contac
 
 const RATE_LIMIT = 30;
 const RATE_WINDOW = 3600;
+const MAX_BODY_SIZE = 1024;
+
+function json(data, status, headers) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...headers, 'Content-Type': 'application/json' },
+  });
+}
 
 function corsHeaders(origin, allowedOrigin) {
   const o = origin === allowedOrigin ? origin : allowedOrigin;
@@ -66,36 +74,34 @@ export default {
       return new Response(null, { status: 204, headers });
     }
 
+    const url = new URL(request.url);
+    if (url.pathname !== '/chat') {
+      return json({ error: 'Not found' }, 404, headers);
+    }
+
     if (request.method !== 'POST') {
-      return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-        status: 405,
-        headers: { ...headers, 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Method not allowed' }, 405, headers);
+    }
+
+    const contentType = request.headers.get('Content-Type') || '';
+    if (!contentType.includes('application/json')) {
+      return json({ error: 'Content-Type must be application/json' }, 415, headers);
+    }
+
+    const contentLength = parseInt(request.headers.get('Content-Length') || '0', 10);
+    if (contentLength > MAX_BODY_SIZE) {
+      return json({ error: 'Request body too large' }, 413, headers);
     }
 
     try {
-      const url = new URL(request.url);
-      if (url.pathname !== '/chat') {
-        return new Response(JSON.stringify({ error: 'Not found' }), {
-          status: 404,
-          headers: { ...headers, 'Content-Type': 'application/json' },
-        });
-      }
-
       const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
       if (!(await checkRateLimit(ip, env))) {
-        return new Response(JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }), {
-          status: 429,
-          headers: { ...headers, 'Content-Type': 'application/json' },
-        });
+        return json({ error: 'Rate limit exceeded. Try again later.' }, 429, headers);
       }
 
       const { message, lang } = await request.json();
       if (!message || typeof message !== 'string' || message.trim().length === 0) {
-        return new Response(JSON.stringify({ error: 'Message is required' }), {
-          status: 400,
-          headers: { ...headers, 'Content-Type': 'application/json' },
-        });
+        return json({ error: 'Message is required' }, 400, headers);
       }
 
       const truncated = message.slice(0, 500);
@@ -119,27 +125,15 @@ export default {
       });
 
       if (!groqRes.ok) {
-        const errText = await groqRes.text();
-        console.error('Groq error:', groqRes.status, errText);
-        return new Response(JSON.stringify({ error: 'AI service temporarily unavailable' }), {
-          status: 502,
-          headers: { ...headers, 'Content-Type': 'application/json' },
-        });
+        return json({ error: 'AI service temporarily unavailable' }, 502, headers);
       }
 
       const data = await groqRes.json();
       const reply = data.choices?.[0]?.message?.content || 'No response generated.';
 
-      return new Response(JSON.stringify({ reply }), {
-        status: 200,
-        headers: { ...headers, 'Content-Type': 'application/json' },
-      });
+      return json({ reply }, 200, headers);
     } catch (err) {
-      console.error('Worker error:', err);
-      return new Response(JSON.stringify({ error: 'Internal error' }), {
-        status: 500,
-        headers: { ...headers, 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Internal error' }, 500, headers);
     }
   },
 };

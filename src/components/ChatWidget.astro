@@ -132,11 +132,15 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
     showLoading();
 
     try {
+      var controller = new AbortController();
+      var timeoutId = setTimeout(function () { controller.abort(); }, 15000);
       var res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, lang: lang })
+        body: JSON.stringify({ message: text, lang: lang }),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
       var data = await res.json();
       removeLoading();
       if (data.reply) {
@@ -147,7 +151,10 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
       }
     } catch (err) {
       removeLoading();
-      addMessage(lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.', 'bot');
+      var errMsg = err.name === 'AbortError'
+        ? (lang === 'es' ? 'La respuesta tardó demasiado. Intenta de nuevo.' : 'Response took too long. Please try again.')
+        : (lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.');
+      addMessage(errMsg, 'bot');
     } finally {
       isLoading = false;
       if (messageCount >= MAX_MESSAGES && limitMsg) {
