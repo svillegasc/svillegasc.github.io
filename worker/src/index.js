@@ -59,6 +59,8 @@ async function checkRateLimit(ip, env) {
 
 export default {
   async fetch(request, env) {
+    console.log('GROQ_API_KEY exists:', !!env.GROQ_API_KEY);
+    console.log('GROQ_API_KEY length:', env.GROQ_API_KEY ? env.GROQ_API_KEY.length : 0);
     const origin = request.headers.get('Origin') || '';
     const headers = corsHeaders(origin, env.ALLOWED_ORIGIN);
 
