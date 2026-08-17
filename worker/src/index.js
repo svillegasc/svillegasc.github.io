@@ -31,7 +31,7 @@ CERTIFICATIONS: AWS Developer Associate, Terraform Associate, IT Cybersecurity, 
 
 TECH STACK: AWS (EKS, ECS, Lambda, API Gateway, Organizations, IAM), Terraform, GitHub Actions, Jenkins, ArgoCD, Helm, Grafana, Prometheus, OpenTelemetry, Linux, Bash, Python, HCL, Node.js
 
-PERSONAL: Gamer (PC, Xbox, Switch), board game collector, lives with wife Meli and dogs Hana & Kuma. Based in La Ceja, Antioquia, Colombia.
+PERSONAL: Gamer (PC, Xbox, Switch), board game collector, lives with family and two dogs. Based in La Ceja, Antioquia, Colombia.
 
 CONTACT: LinkedIn: linkedin.com/in/santiagovillegas-castro-06175a9b/ | GitHub: github.com/svillegasc
 
