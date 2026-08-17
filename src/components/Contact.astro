@@ -13,18 +13,18 @@
       <form id="contact-form" class="reveal" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="ba58360c-e987-44fd-ac87-6c5c30f2bd12">
         <input type="hidden" name="redirect" value="https://svillegasc.github.io/#contacto">
-        <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
+        <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" autocomplete="off">
         <div class="form-field">
-          <label class="lang-es">Nombre</label><label class="lang-en">Name</label>
-          <input type="text" id="cf-name" name="name" required>
+          <label for="cf-name" class="lang-es">Nombre</label><label for="cf-name" class="lang-en">Name</label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name">
         </div>
         <div class="form-field">
-          <label>Email</label>
-          <input type="email" id="cf-email" name="email" required>
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" required autocomplete="email">
         </div>
         <div class="form-field">
-          <label class="lang-es">Mensaje</label><label class="lang-en">Message</label>
-          <textarea id="cf-message" name="message" required></textarea>
+          <label for="cf-message" class="lang-es">Mensaje</label><label for="cf-message" class="lang-en">Message</label>
+          <textarea id="cf-message" name="message" required autocomplete="off"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" id="cf-submit">
           <span class="lang-es">Enviar mensaje</span><span class="lang-en">Send message</span>
@@ -34,15 +34,15 @@
 
       <div class="contact-card reveal">
         <a class="contact-link" href="https://linkedin.com/in/santiagovillegas-castro-06175a9b/" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           LinkedIn
         </a>
         <a class="contact-link" href="https://github.com/svillegasc" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.7 2.8 5.6 3.1 5.6 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.7 2.8 5.6 3.1 5.6 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
           GitHub
         </a>
         <div class="contact-link no-border">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 4 3 7.3 7 7.9V13H9v-3h2V8.5C11 6.6 12.2 5.5 14 5.5c.8 0 1.6.1 1.6.1v2h-1c-.9 0-1.2.6-1.2 1.2V10h2.1l-.3 3H13.4v4.9c4-.6 7-3.9 7-7.9Z"></path></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 4 3 7.3 7 7.9V13H9v-3h2V8.5C11 6.6 12.2 5.5 14 5.5c.8 0 1.6.1 1.6.1v2h-1c-.9 0-1.2.6-1.2 1.2V10h2.1l-.3 3H13.4v4.9c4-.6 7-3.9 7-7.9Z"></path></svg>
           <span class="lang-es">Medellín, Colombia</span><span class="lang-en">Medellín, Colombia</span>
         </div>
       </div>

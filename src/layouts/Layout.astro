@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE_URL } from '../data/site';
 
 interface Props {
   title: string;
@@ -7,93 +8,169 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
 ---
 
 <!DOCTYPE html>
-<html lang="es" data-lang="es">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content={description}>
+<link rel="canonical" href={canonicalURL}>
+<meta name="theme-color" content="#0B1220">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonicalURL}>
+<meta property="og:site_name" content="Santiago Villegas Castro">
+<meta property="og:locale" content="es_CO">
+<meta property="og:locale:alternate" content="en_US">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Santiago Villegas Castro",
+  "jobTitle": "Senior DevOps & Cloud Infrastructure Engineer",
+  "url": "https://svillegasc.github.io",
+  "sameAs": [
+    "https://linkedin.com/in/santiagovillegas-castro-06175a9b/",
+    "https://github.com/svillegasc"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Medellín",
+    "addressCountry": "CO"
+  }
+}
+</script>
 </head>
 <body data-lang="es">
 
+<a href="#inicio" class="skip-link">Skip to content</a>
+
 <slot />
 
-<script is:inline>
-  document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  function setLang(lang){
+  function setLang(lang) {
     document.body.setAttribute('data-lang', lang);
     document.documentElement.setAttribute('lang', lang);
-    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+    const btnEs = document.getElementById('btn-es');
+    const btnEn = document.getElementById('btn-en');
+    if (btnEs) {
+      btnEs.classList.toggle('active', lang === 'es');
+      btnEs.setAttribute('aria-pressed', lang === 'es' ? 'true' : 'false');
+    }
+    if (btnEn) {
+      btnEn.classList.toggle('active', lang === 'en');
+      btnEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    }
   }
-  document.getElementById('btn-es').addEventListener('click', function(){ setLang('es'); });
-  document.getElementById('btn-en').addEventListener('click', function(){ setLang('en'); });
 
-  var header = document.getElementById('site-header');
-  window.addEventListener('scroll', function(){
-    header.classList.toggle('scrolled', window.scrollY > 12);
+  const btnEs = document.getElementById('btn-es');
+  const btnEn = document.getElementById('btn-en');
+  if (btnEs) btnEs.addEventListener('click', function () { setLang('es'); });
+  if (btnEn) btnEn.addEventListener('click', function () { setLang('en'); });
+
+  const header = document.getElementById('site-header');
+  if (header) {
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('scrolled', window.scrollY > 12);
+    });
+  }
+
+  function toggleMobileNav(open) {
+    const nav = document.getElementById('mobile-nav');
+    if (!nav) return;
+    nav.classList.toggle('open', open);
+    if (open) {
+      const closeBtn = document.getElementById('menu-close-btn');
+      if (closeBtn) closeBtn.focus();
+    }
+  }
+
+  const menuOpenBtn = document.getElementById('menu-open-btn');
+  const menuCloseBtn = document.getElementById('menu-close-btn');
+  if (menuOpenBtn) menuOpenBtn.addEventListener('click', function () { toggleMobileNav(true); });
+  if (menuCloseBtn) menuCloseBtn.addEventListener('click', function () { toggleMobileNav(false); });
+  document.querySelectorAll('.mobile-nav a').forEach(function (el) {
+    el.addEventListener('click', function () { toggleMobileNav(false); });
   });
 
-  function toggleMobileNav(open){
-    document.getElementById('mobile-nav').classList.toggle('open', open);
-  }
-  document.getElementById('menu-open-btn').addEventListener('click', function(){ toggleMobileNav(true); });
-  document.getElementById('menu-close-btn').addEventListener('click', function(){ toggleMobileNav(false); });
-  document.querySelectorAll('.mobile-nav a').forEach(function(el){
-    el.addEventListener('click', function(){ toggleMobileNav(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') toggleMobileNav(false);
   });
 
-  var revealEls = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
     });
   }, { threshold: 0.15 });
-  revealEls.forEach(function(el){ io.observe(el); });
+  revealEls.forEach(function (el) { io.observe(el); });
 
-  var form = document.getElementById('contact-form');
-  var statusEl = document.getElementById('form-status');
-  var submitBtn = document.getElementById('cf-submit');
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('cf-submit');
 
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    var lang = document.body.getAttribute('data-lang');
-    submitBtn.disabled = true;
-    statusEl.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
-    statusEl.className = 'form-status form-status-pending';
-
-    try{
-      var response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      });
-      var result = await response.json();
-      if(result.success){
-        statusEl.textContent = lang === 'es' ? '¡Mensaje enviado! Te responderé pronto.' : "Message sent! I'll get back to you soon.";
-        statusEl.className = 'form-status form-status-ok';
-        form.reset();
-      } else {
-        throw new Error(result.message || 'submission failed');
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const lang = document.body.getAttribute('data-lang');
+      if (submitBtn) submitBtn.disabled = true;
+      if (statusEl) {
+        statusEl.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
+        statusEl.className = 'form-status form-status-pending';
       }
-    } catch(err){
-      statusEl.textContent = lang === 'es'
-        ? 'No se pudo enviar. Intenta de nuevo o escríbeme por LinkedIn.'
-        : "Couldn't send it. Please try again or reach out on LinkedIn.";
-      statusEl.className = 'form-status form-status-error';
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
 
-  setLang('es');
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const result = await response.json();
+        if (result.success) {
+          if (statusEl) {
+            statusEl.textContent = lang === 'es' ? '¡Mensaje enviado! Te responderé pronto.' : "Message sent! I'll get back to you soon.";
+            statusEl.className = 'form-status form-status-ok';
+          }
+          form.reset();
+        } else {
+          throw new Error(result.message || 'submission failed');
+        }
+      } catch (err) {
+        if (statusEl) {
+          statusEl.textContent = lang === 'es'
+            ? 'No se pudo enviar. Intenta de nuevo o escríbeme por LinkedIn.'
+            : "Couldn't send it. Please try again or reach out on LinkedIn.";
+          statusEl.className = 'form-status form-status-error';
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
+  const saved = localStorage.getItem('lang');
+  const browserLang = navigator.language.startsWith('en') ? 'en' : 'es';
+  setLang(saved || browserLang);
 </script>
 </body>
 </html>
