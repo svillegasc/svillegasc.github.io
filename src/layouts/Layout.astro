@@ -21,6 +21,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
 <meta name="description" content={description}>
 <link rel="canonical" href={canonicalURL}>
 <meta name="theme-color" content="#0B1220">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1220'/><text x='12' y='68' font-family='system-ui' font-weight='700' font-size='48' fill='%23CBD5E1'>S</text><text x='48' y='68' font-family='system-ui' font-weight='700' font-size='48' fill='%2312A8A0'>VC</text></svg>">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content={title}>
@@ -29,6 +30,8 @@ const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
 <meta property="og:site_name" content="Santiago Villegas Castro">
 <meta property="og:locale" content="es_CO">
 <meta property="og:locale:alternate" content="en_US">
+
+<meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect width='1200' height='630' fill='%230B1220'/><text x='60' y='280' font-family='system-ui' font-weight='700' font-size='72' fill='%23CBD5E1'>Santiago Villegas</text><text x='60' y='370' font-family='system-ui' font-weight='500' font-size='36' fill='%2312A8A0'>Senior DevOps &amp; Cloud</text><text x='60' y='440' font-family='monospace' font-size='24' fill='%2364748B'>8+ años · AWS · Terraform · Kubernetes</text><rect x='60' y='500' width='200' height='48' rx='24' fill='%2312A8A0'/><text x='90' y='532' font-family='system-ui' font-weight='600' font-size='20' fill='%230B1220'>Disponible</text></svg>">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content={title}>
@@ -51,7 +54,8 @@ const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
   ],
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Medellín",
+    "addressLocality": "La Ceja",
+    "addressRegion": "Antioquia",
     "addressCountry": "CO"
   }
 }
@@ -62,6 +66,10 @@ const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
 <a href="#inicio" class="skip-link">Skip to content</a>
 
 <slot />
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
 
 <ChatWidget />
 

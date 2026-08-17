@@ -20,6 +20,8 @@ PROFESSIONAL INFO:
   - Designed HA infrastructure, CI/CD pipelines, cloud security controls
 - Junior roles at Copa Airlines/S4N and VirtualBeans (2017-2019)
 
+STATUS: Currently open to new opportunities.
+
 EDUCATION:
 - Software Engineering, Universidad Católica del Norte (2018-2022)
 - Systems Automation Technology, Politécnico JIC (2015-2017)
@@ -29,7 +31,7 @@ CERTIFICATIONS: AWS Developer Associate, Terraform Associate, IT Cybersecurity, 
 
 TECH STACK: AWS (EKS, ECS, Lambda, API Gateway, Organizations, IAM), Terraform, GitHub Actions, Jenkins, ArgoCD, Helm, Grafana, Prometheus, OpenTelemetry, Linux, Bash, Python, HCL, Node.js
 
-PERSONAL: Gamer (PC, Xbox, Switch), board game collector, lives with wife Meli and dogs Hana & Kuma. Based in Medellín, Colombia.
+PERSONAL: Gamer (PC, Xbox, Switch), board game collector, lives with wife Meli and dogs Hana & Kuma. Based in La Ceja, Antioquia, Colombia.
 
 CONTACT: LinkedIn: linkedin.com/in/santiagovillegas-castro-06175a9b/ | GitHub: github.com/svillegasc
 

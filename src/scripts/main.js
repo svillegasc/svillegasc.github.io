@@ -106,3 +106,13 @@ if (form) {
 const saved = localStorage.getItem('lang');
 const browserLang = navigator.language.startsWith('en') ? 'en' : 'es';
 setLang(saved || browserLang);
+
+const scrollTopBtn = document.getElementById('scroll-top-btn');
+if (scrollTopBtn) {
+  window.addEventListener('scroll', function () {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
