@@ -146,7 +146,8 @@ export default {
       }
 
       const data = await groqRes.json();
-      const reply = data.choices?.[0]?.message?.content || 'No response generated.';
+      let reply = data.choices?.[0]?.message?.content || 'No response generated.';
+      reply = reply.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
 
       return json({ reply }, 200, headers);
     } catch (err) {
