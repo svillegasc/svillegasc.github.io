@@ -201,8 +201,8 @@ nav.main-nav a:hover{color:var(--white);}
 }
 
 .hero-stats{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
-  margin-top:32px;max-width:480px;
+  display:flex;gap:16px;
+  margin-top:32px;max-width:200px;
 }
 .hero-stat{
   display:flex;flex-direction:column;
@@ -461,7 +461,6 @@ footer .foot-links a:hover{color:var(--white);}
   .header-cta-btn{display:inline-flex;}
   .hero .container{grid-template-columns:1.1fr 0.9fr;align-items:center;}
   .stack-grid{grid-template-columns:1fr 1fr 1fr;}
-  .hero-stats{grid-template-columns:repeat(4,1fr);max-width:100%;}
   .philosophy-grid{grid-template-columns:1fr 1fr 1fr;}
   .what-looking-grid{grid-template-columns:1fr 1fr 1fr;}
   .future-grid{grid-template-columns:1fr 1fr 1fr;}
