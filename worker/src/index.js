@@ -131,21 +131,24 @@ export default {
           'Authorization': `Bearer ${env.GROQ_API_KEY}`,
         },
         body: JSON.stringify({
-          model: 'qwen/qwen3.6-27b',
+          model: 'openai/gpt-oss-20b',
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: `${userPrefix}\n${truncated}` },
           ],
-          temperature: 0,
+          temperature: 0.3,
           max_tokens: 300,
         }),
       });
 
       if (!groqRes.ok) {
+        const errBody = await groqRes.text();
+        console.log('Groq error:', groqRes.status, errBody);
         return json({ error: 'AI service temporarily unavailable' }, 502, headers);
       }
 
       const data = await groqRes.json();
+      console.log('Groq response:', JSON.stringify(data).slice(0, 500));
       let reply = data.choices?.[0]?.message?.content || 'No response generated.';
       const thinkStart = reply.indexOf('<think>');
       if (thinkStart !== -1) {
@@ -158,6 +161,7 @@ export default {
 
       return json({ reply }, 200, headers);
     } catch (err) {
+      console.log('Worker error:', err.message, err.stack);
       return json({ error: 'Internal error' }, 500, headers);
     }
   },
