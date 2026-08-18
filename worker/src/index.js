@@ -147,7 +147,14 @@ export default {
 
       const data = await groqRes.json();
       let reply = data.choices?.[0]?.message?.content || 'No response generated.';
-      reply = reply.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+      const thinkStart = reply.indexOf('<think>');
+      if (thinkStart !== -1) {
+        const thinkEnd = reply.indexOf('</think>', thinkStart);
+        reply = thinkEnd !== -1
+          ? reply.slice(0, thinkStart) + reply.slice(thinkEnd + 9)
+          : reply.slice(0, thinkStart);
+      }
+      reply = reply.trim();
 
       return json({ reply }, 200, headers);
     } catch (err) {
