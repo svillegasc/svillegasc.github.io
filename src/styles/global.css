@@ -96,13 +96,13 @@ header.scrolled{
   padding:12px 0;
 }
 .logo{
-  font-family:var(--font-display);
+  font-family:var(--font-mono);
   font-weight:700;
   font-size:19px;
   color:var(--white);
   letter-spacing:.02em;
 }
-.logo span{color:var(--teal);}
+.logo-prompt{color:var(--teal);}
 nav.main-nav{display:none;gap:32px;align-items:center;}
 nav.main-nav a{
   color:#CBD5E1;font-size:14.5px;font-weight:500;
@@ -362,11 +362,6 @@ nav.main-nav a:hover{color:var(--white);}
 .future-icon svg{width:20px;height:20px;stroke:var(--teal);}
 .future-card h3{font-size:16px;margin-bottom:8px;}
 .future-card p{font-size:14.5px;color:var(--slate);line-height:1.6;}
-.future-card-highlight{border-color:var(--teal);position:relative;}
-.future-card-highlight::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:var(--radius) var(--radius) 0 0;
-}
 .future-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
 .future-tag{
   font-family:var(--font-mono);font-size:12px;background:rgba(18,168,160,0.1);
