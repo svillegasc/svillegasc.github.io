@@ -3,6 +3,7 @@ dist/
 
 # dependencies
 node_modules/
+worker/node_modules/
 
 # logs
 npm-debug.log*
@@ -17,6 +18,9 @@ npm-debug.log*
 
 # astro
 .astro/
+
+# cloudflare
+worker/.wrangler/
 
 # os
 .DS_Store

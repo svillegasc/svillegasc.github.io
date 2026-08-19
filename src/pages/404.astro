@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="404 — Página no encontrada | Santiago Villegas Castro"
+  description="La página que buscas no existe."
+>
+  <section class="hero" style="min-height:80vh;display:flex;align-items:center;">
+    <div class="container" style="text-align:center;">
+      <p class="eyebrow">404</p>
+      <h1 style="color:var(--white);font-size:clamp(36px,6vw,56px);margin-bottom:16px;">
+        <span class="lang-es">Página no encontrada</span>
+        <span class="lang-en">Page not found</span>
+      </h1>
+      <p class="hero-sub" style="margin:0 auto 36px;">
+        <span class="lang-es">El enlace que seguiste no existe o fue movido. Puedes volver al inicio.</span>
+        <span class="lang-en">The link you followed doesn't exist or was moved. You can go back home.</span>
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">
+          <span class="lang-es">Volver al inicio</span>
+          <span class="lang-en">Go home</span>
+        </a>
+        <a href="#contacto" class="btn btn-outline">
+          <span class="lang-es">Contacto</span>
+          <span class="lang-en">Contact</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
