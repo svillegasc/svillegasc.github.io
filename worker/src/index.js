@@ -113,7 +113,14 @@ export default {
         return json({ error: 'Rate limit exceeded. Try again later.' }, 429, headers);
       }
 
-      const { message, lang } = await request.json();
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return json({ error: 'Invalid JSON' }, 400, headers);
+      }
+
+      const { message, lang } = body;
       if (!message || typeof message !== 'string' || message.trim().length === 0) {
         return json({ error: 'Message is required' }, 400, headers);
       }

@@ -4,3 +4,7 @@ compatibility_date = "2026-08-17"
 
 [vars]
 ALLOWED_ORIGIN = "https://svillegasc.github.io"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "4bc95581e32c4e31b4f0e76e21805e13"
