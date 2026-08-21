@@ -42,9 +42,11 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
   var PLACEHOLDER_ES = 'Pregúntale a Santiago...';
   var PLACEHOLDER_EN = 'Ask Santiago...';
 
+  var MAX_HISTORY_MESSAGES = 8; // últimos 4 intercambios (user+assistant) — debe coincidir con el worker
   var messageCount = 0;
   var isOpen = false;
   var isLoading = false;
+  var conversationHistory = [];
 
   var widget = document.getElementById('chat-widget');
   var toggle = document.getElementById('chat-toggle');
@@ -75,6 +77,7 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
   function initWelcome() {
     messages.innerHTML = '';
     messageCount = 0;
+    conversationHistory = [];
     var lang = getLang();
     addMessage(lang === 'es' ? WELCOME_ES : WELCOME_EN, 'bot');
     updatePlaceholder();
@@ -137,7 +140,7 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
       var res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, lang: lang }),
+        body: JSON.stringify({ message: text, lang: lang, history: conversationHistory }),
         signal: controller.signal
       });
       clearTimeout(timeoutId);
@@ -146,6 +149,13 @@ const WORKER_URL = 'https://svillegasc-chat.svillegasc.workers.dev/chat';
       if (data.reply) {
         addMessage(data.reply, 'bot');
         messageCount++;
+        // Solo se guarda en el historial si hubo respuesta válida — si falló,
+        // el intercambio no queda registrado para el próximo turno.
+        conversationHistory.push({ role: 'user', content: text });
+        conversationHistory.push({ role: 'assistant', content: data.reply });
+        if (conversationHistory.length > MAX_HISTORY_MESSAGES) {
+          conversationHistory = conversationHistory.slice(-MAX_HISTORY_MESSAGES);
+        }
       } else {
         addMessage(lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.', 'bot');
       }
